@@ -1,0 +1,53 @@
+package nl.rws.rb.rules.OrderApproval;
+ 
+import nl.rws.re.facts.userguide.OrderAccept;
+import nl.rws.re.facts.userguide.OrderReject;
+import nl.rws.re.facts.userguide.PlaceOrder;
+ 
+rule "Order Approval Rule" dialect "mvel" no-loop true salience 4
+ 
+when
+    $placeOrder : PlaceOrder( ( symbol == "Company A" && quantity > 10 )
+    || ( symbol == "Company B" && price > 100 )
+    || ( symbol == "Company C" && price > 50 && quantity < 200 ) )
+then
+ 
+    OrderAccept orderAccept = new OrderAccept();
+    orderAccept.setMessage("Accepted order for: "+ $placeOrder.quantity + " stocks of "+
+    $placeOrder.symbol +" at $" + $placeOrder.price);
+    insertLogical(orderAccept);
+end
+ 
+rule "Company A Order Deny Rule" dialect "mvel" no-loop true salience 3
+ 
+when
+    not ( OrderAccept())
+    $placeOrder : PlaceOrder( symbol == "Company A" )
+then
+    retract($placeOrder);
+    OrderReject orderReject = new OrderReject();
+    orderReject.setReason("An Order for stocks of Company A is accepted only if the number of stocks is higher than 10.");
+    insertLogical(orderReject);
+end
+ 
+rule "Company B Order Deny Rule" dialect "mvel" no-loop true salience 2
+when
+    not ( OrderAccept())
+    $placeOrder : PlaceOrder( symbol == "Company B" )
+then
+    retract($placeOrder);
+    OrderReject orderReject = new OrderReject();
+    orderReject.setReason("An Order for stocks of Company B is accepted only if the stock price is higher than 100 $.");
+    insertLogical(orderReject);
+end
+ 
+rule "Company C Order Deny Rule" dialect "mvel" no-loop true salience 1
+when
+    not ( OrderAccept())
+    $placeOrder : PlaceOrder( symbol == "Company C" )
+then
+    retract($placeOrder);
+    OrderReject orderReject = new OrderReject();
+    orderReject.setReason("An Order for stocks of Company C is accepted only if the stock price is higher than 50 $ and the number of stocks is lower than 200.");
+    insertLogical(orderReject);
+end

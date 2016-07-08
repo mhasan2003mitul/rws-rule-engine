@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/assembly/assembly.iml" filepath="$PROJECT_DIR$/assembly/assembly.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frontend/frontend.iml" filepath="$PROJECT_DIR$/frontend/frontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/facts/re-facts.iml" filepath="$PROJECT_DIR$/facts/re-facts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/re-parent.iml" filepath="$PROJECT_DIR$/re-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rules/re-rules.iml" filepath="$PROJECT_DIR$/rules/re-rules.iml" />
+    </modules>
+  </component>
+</project>
