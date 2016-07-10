@@ -22,7 +22,7 @@
                             <directory>../facts/target</directory>
                             <outputDirectory>lib</outputDirectory>
                             <includes>
-                                <include>rb-facts-1.0-SNAPSHOT.jar</include>
+                                <include>re-facts-1.0-SNAPSHOT.jar</include>
                             </includes>
                         </fileSet>
                         <fileset>

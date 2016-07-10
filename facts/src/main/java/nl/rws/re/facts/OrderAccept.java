@@ -3,15 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nl.rws.re.facts.userguide;
+package nl.rws.re.facts;
 
 /**
- *
- * @author Administrator
+ * @author Mainul
  */
-public class OrderAccept {
+public class OrderAccept extends OrderStatus {
 
     private String message;
+
+    public OrderAccept() {
+
+    }
+
+    public OrderAccept(String message) {
+        this.message = message;
+    }
 
     public String getMessage() {
         return message;

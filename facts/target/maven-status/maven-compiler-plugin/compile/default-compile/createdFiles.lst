@@ -1,3 +1,4 @@
-nl\rws\re\facts\userguide\OrderAccept.class
-nl\rws\re\facts\userguide\PlaceOrder.class
-nl\rws\re\facts\userguide\OrderReject.class
+nl\rws\re\facts\OrderReject.class
+nl\rws\re\facts\OrderStatus.class
+nl\rws\re\facts\OrderAccept.class
+nl\rws\re\facts\PlaceOrder.class

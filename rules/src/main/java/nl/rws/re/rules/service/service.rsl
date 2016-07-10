@@ -1,17 +1,17 @@
 <ruleService
         name="OrderApprovalService"
         xmlns="http://wso2.org/carbon/rules"
-        targetNamespace="http://com.test/orderApproval">
-  <ruleSet>
+        targetNamespace="http://facts.re.rws.nl/orderApproval">
+    <ruleSet>
         <rule resourceType="regular" sourceType="file">orderApprovalRules.drl</rule>
     </ruleSet>
     <operation name="placeOrder">
-        <input wrapperElementName="placeOrder" namespace="http://com.test/placeorder">
-            <fact elementName="order" namespace="http://com.test/placeorder" type="nl.rws.rb.facts.userguide.PlaceOrder"></fact>
+        <input wrapperElementName="placeOrder">
+            <fact elementName="order" type="nl.rws.re.facts.PlaceOrder"></fact>
         </input>
-        <output wrapperElementName="placeOrderRespone" namespace="http://com.test/placeorder">
-            <fact elementName="orderAccept" namespace="http://com.test/placeorder" type="nl.rws.rb.facts.userguide.OrderAccept"></fact>
-            <fact elementName="orderReject" namespace="http://com.test/placeorder" type="nl.rws.rb.facts.userguide.OrderReject"></fact>
+        <output wrapperElementName="placeOrderResponse">
+            <fact elementName="orderStatus" type="nl.rws.re.facts.OrderAccept"></fact>
+            <fact elementName="orderReject" type="nl.rws.re.facts.OrderReject"></fact>
         </output>
     </operation>
 </ruleService>

@@ -3,16 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nl.rws.re.facts.userguide;
+package nl.rws.re.facts;
 
 /**
- * @author Administrator
+ * @author Mainul
  */
 public class PlaceOrder {
 
     public String symbol;
     public int quantity;
     public double price;
+
+    public PlaceOrder() {
+
+    }
+
+    public PlaceOrder(String symbol, int quantity, double price) {
+        this.symbol = symbol;
+        this.quantity = quantity;
+        this.price = price;
+    }
 
     public String getSymbol() {
 

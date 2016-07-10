@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="57b6dbf7-0c76-4cec-bdf0-d15f9ee8f0c7" activeEnvironment="Default" name="re-parent" soapui-version="5.2.1" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Environment" value="Default"/>
+  <con:entry key="Global Properties" value=""/>
+  <con:entry key="TestSuite" value="&lt;all>"/>
+  <con:entry key="Password" value=""/>
+  <con:entry key="TestRunner Path" value=""/>
+  <con:entry key="Tool Args" value=""/>
+  <con:entry key="Ignore Errors" value="false"/>
+  <con:entry key="Host:Port" value=""/>
+  <con:entry key="user-settings.xml Password" value=""/>
+  <con:entry key="WSS Password Type" value=""/>
+  <con:entry key="Save Project" value="false"/>
+  <con:entry key="Enable UI" value="false"/>
+  <con:entry key="System Properties" value=""/>
+  <con:entry key="Domain" value=""/>
+  <con:entry key="Coverage Report" value="false"/>
+  <con:entry key="Export JUnit Results" value="false"/>
+  <con:entry key="Export JUnit Results with test properties" value="false"/>
+  <con:entry key="Open Report" value="false"/>
+  <con:entry key="Project Properties" value=""/>
+  <con:entry key="Export All" value="false"/>
+  <con:entry key="Project Password" value=""/>
+  <con:entry key="Report Format(s)" value=""/>
+  <con:entry key="TestCase" value="&lt;all>"/>
+  <con:entry key="Print Report" value="false"/>
+  <con:entry key="Username" value=""/>
+  <con:entry key="Root Folder" value=""/>
+  <con:entry key="Select Report Type" value=""/>
+  <con:entry key="Save After" value="false"/>
+  <con:entry key="Add Settings" value="false"/>
+  <con:entry key="Endpoint" value=""/>
+</xml-fragment>]]></con:setting></con:settings><con:interface xsi:type="con:WsdlInterface" id="df08dbe5-e996-4337-885d-6370cdfb2eeb" wsaVersion="NONE" name="OrderApprovalServiceSoap12Binding" type="wsdl" bindingName="{http://facts.re.rws.nl/orderApproval}OrderApprovalServiceSoap12Binding" soapVersion="1_2" anonymous="optional" definition="http://172.31.145.87:9778/services/OrderApprovalService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpSoap12Endpoint/</con:endpoint><con:endpoint>https://172.31.145.87:9458/services/OrderApprovalService.OrderApprovalServiceHttpsSoap12Endpoint/</con:endpoint></con:endpoints><con:operation id="e02e459e-d674-4e8f-bff3-04e64024eb62" isOneWay="false" action="urn:placeOrder" name="placeOrder" bindingOperationName="placeOrder" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="81313846-d6b1-4a6b-b3cf-425499a64e48" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpSoap12Endpoint/</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ord="http://facts.re.rws.nl/orderApproval" xmlns:fac="http://facts.re.rws.nl">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <ord:placeOrder>\r
+         <!--Zero or more repetitions:-->\r
+         <ord:order>\r
+            <!--Optional:-->\r
+            <fac:price>?</fac:price>\r
+            <!--Optional:-->\r
+            <fac:quantity>?</fac:quantity>\r
+            <!--Optional:-->\r
+            <fac:symbol>?</fac:symbol>\r
+         </ord:order>\r
+      </ord:placeOrder>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:placeOrder"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="6a4d8f35-6ad9-447c-a657-f1c1018fc052" wsaVersion="NONE" name="OrderApprovalServiceSoap11Binding" type="wsdl" bindingName="{http://facts.re.rws.nl/orderApproval}OrderApprovalServiceSoap11Binding" soapVersion="1_1" anonymous="optional" definition="http://172.31.145.87:9778/services/OrderApprovalService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://172.31.145.87:9778/services/OrderApprovalService?wsdl"><con:part><con:url>http://172.31.145.87:9778/services/OrderApprovalService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://facts.re.rws.nl/orderApproval" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ax2454="http://facts.re.rws.nl" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ax2453="http://facts.re.rws.nl/orderApproval">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://facts.re.rws.nl/orderApproval" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="placeOrder">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="order" type="ax2454:PlaceOrder"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="placeOrderResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="orderStatus" type="ax2454:OrderAccept"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="orderReject" type="ax2454:OrderReject"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://facts.re.rws.nl" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="PlaceOrder">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="price" type="xs:double"/>
+          <xs:element minOccurs="0" name="quantity" type="xs:int"/>
+          <xs:element minOccurs="0" name="symbol" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="OrderStatus">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="OrderAccept">
+        <xs:complexContent>
+          <xs:extension base="ax2454:OrderStatus">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="message" nillable="true" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="OrderReject">
+        <xs:complexContent>
+          <xs:extension base="ax2454:OrderStatus">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="reason" nillable="true" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="placeOrderRequestMessage">
+    <wsdl:part name="parameters" element="ax2453:placeOrder"/>
+  </wsdl:message>
+  <wsdl:message name="placeOrderResponseMessage">
+    <wsdl:part name="parameters" element="ax2453:placeOrderResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="OrderApprovalServicePortType">
+    <wsdl:operation name="placeOrder">
+      <wsdl:input message="ax2453:placeOrderRequestMessage" wsaw:Action="urn:placeOrder"/>
+      <wsdl:output message="ax2453:placeOrderResponseMessage" wsaw:Action="urn:placeOrderResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OrderApprovalServiceSoap11Binding" type="ax2453:OrderApprovalServicePortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="placeOrder">
+      <soap:operation soapAction="urn:placeOrder" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OrderApprovalServiceSoap12Binding" type="ax2453:OrderApprovalServicePortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="placeOrder">
+      <soap12:operation soapAction="urn:placeOrder" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OrderApprovalServiceHttpBinding" type="ax2453:OrderApprovalServicePortType">
+    <http:binding verb="POST"/>
+    <wsdl:operation name="placeOrder">
+      <http:operation location="placeOrder"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OrderApprovalService">
+    <wsdl:port name="OrderApprovalServiceHttpSoap11Endpoint" binding="ax2453:OrderApprovalServiceSoap11Binding">
+      <soap:address location="http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpSoap11Endpoint/"/>
+    </wsdl:port>
+    <wsdl:port name="OrderApprovalServiceHttpsSoap11Endpoint" binding="ax2453:OrderApprovalServiceSoap11Binding">
+      <soap:address location="https://172.31.145.87:9458/services/OrderApprovalService.OrderApprovalServiceHttpsSoap11Endpoint/"/>
+    </wsdl:port>
+    <wsdl:port name="OrderApprovalServiceHttpSoap12Endpoint" binding="ax2453:OrderApprovalServiceSoap12Binding">
+      <soap12:address location="http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpSoap12Endpoint/"/>
+    </wsdl:port>
+    <wsdl:port name="OrderApprovalServiceHttpsSoap12Endpoint" binding="ax2453:OrderApprovalServiceSoap12Binding">
+      <soap12:address location="https://172.31.145.87:9458/services/OrderApprovalService.OrderApprovalServiceHttpsSoap12Endpoint/"/>
+    </wsdl:port>
+    <wsdl:port name="OrderApprovalServiceHttpsEndpoint" binding="ax2453:OrderApprovalServiceHttpBinding">
+      <http:address location="https://172.31.145.87:9458/services/OrderApprovalService.OrderApprovalServiceHttpsEndpoint/"/>
+    </wsdl:port>
+    <wsdl:port name="OrderApprovalServiceHttpEndpoint" binding="ax2453:OrderApprovalServiceHttpBinding">
+      <http:address location="http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpEndpoint/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpSoap11Endpoint/</con:endpoint><con:endpoint>https://172.31.145.87:9458/services/OrderApprovalService.OrderApprovalServiceHttpsSoap11Endpoint/</con:endpoint></con:endpoints><con:operation id="840b494c-e773-4a7b-8be0-0fb2ef21a3ce" isOneWay="false" action="urn:placeOrder" name="placeOrder" bindingOperationName="placeOrder" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7047c12a-028e-4ada-9f33-5d52da6f524e" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ord="http://facts.re.rws.nl/orderApproval" xmlns:fac="http://facts.re.rws.nl">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ord:placeOrder>\r
+         <!--Zero or more repetitions:-->\r
+         <ord:order>\r
+            <!--Optional:-->\r
+            <fac:price>?</fac:price>\r
+            <!--Optional:-->\r
+            <fac:quantity>?</fac:quantity>\r
+            <!--Optional:-->\r
+            <fac:symbol>?</fac:symbol>\r
+         </ord:order>\r
+      </ord:placeOrder>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:placeOrder"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="cf35964e-1bea-448f-870a-e5d1b7bc726b" name="re-parent-test-suite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="eb755bcf-52ce-400b-83a2-e96ce7587109" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="testOrderAcceptCompanyA" searchProperties="true"><con:settings/><con:testStep type="request" id="bb9ba31d-8731-4b27-b327-e2d43d75db1f" name="placeOrder"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>OrderApprovalServiceSoap11Binding</con:interface><con:operation>placeOrder</con:operation><con:request name="placeOrder" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="d4159fc9-039b-4226-833d-d64bfbfef125"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ord="http://facts.re.rws.nl/orderApproval" xmlns:fac="http://facts.re.rws.nl">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ord:placeOrder>\r
+         <!--Zero or more repetitions:-->\r
+         <ord:order>\r
+            <!--Optional:-->\r
+            <fac:price>100</fac:price>\r
+            <!--Optional:-->\r
+            <fac:quantity>100</fac:quantity>\r
+            <!--Optional:-->\r
+            <fac:symbol>Company A</fac:symbol>\r
+         </ord:order>\r
+      </ord:placeOrder>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="cfe020b2-3a3a-4a4a-bf2b-3965e82c87c3" name="SOAP Response"/><con:assertion type="Simple Contains" id="f2919165-1d1d-43f5-bd13-f7d36d1e41ef" name="Contains"><con:configuration><token>Accepted order for: 100 stocks of Company A at $100.0</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:placeOrder"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="0efca3de-2eee-44fa-b155-3a8d5f6fb310" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="testOrderAcceptCompanyB" searchProperties="true"><con:settings/><con:testStep type="request" id="3d880be1-eeea-4fa2-853e-ec876d12f04a" name="placeOrder"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>OrderApprovalServiceSoap11Binding</con:interface><con:operation>placeOrder</con:operation><con:request name="placeOrder" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="029ad689-aec8-4734-bce3-adfbcde88426"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ord="http://facts.re.rws.nl/orderApproval" xmlns:fac="http://facts.re.rws.nl">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ord:placeOrder>\r
+         <!--Zero or more repetitions:-->\r
+         <ord:order>\r
+            <!--Optional:-->\r
+            <fac:price>200</fac:price>\r
+            <!--Optional:-->\r
+            <fac:quantity>100</fac:quantity>\r
+            <!--Optional:-->\r
+            <fac:symbol>Company B</fac:symbol>\r
+         </ord:order>\r
+      </ord:placeOrder>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="57345621-41d4-44e5-a30d-9c475f2fb6e9" name="SOAP Response"/><con:assertion type="Simple Contains" id="833250cd-0fdb-494a-a7ab-3e36c5687f9d" name="Contains"><con:configuration><token>Accepted order for: 100 stocks of Company B at $200.0</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:placeOrder"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="381e2949-0119-4f59-be5f-541d9109b8d4" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="testOrderAcceptCompanyC" searchProperties="true"><con:settings/><con:testStep type="request" id="0e49072b-fdd0-41bd-a01d-b43052030bbf" name="placeOrder"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>OrderApprovalServiceSoap11Binding</con:interface><con:operation>placeOrder</con:operation><con:request name="placeOrder" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="f97708d8-2625-4503-919b-133df7d0da56"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ord="http://facts.re.rws.nl/orderApproval" xmlns:fac="http://facts.re.rws.nl">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ord:placeOrder>\r
+         <!--Zero or more repetitions:-->\r
+         <ord:order>\r
+            <!--Optional:-->\r
+            <fac:price>200</fac:price>\r
+            <!--Optional:-->\r
+            <fac:quantity>100</fac:quantity>\r
+            <!--Optional:-->\r
+            <fac:symbol>Company C</fac:symbol>\r
+         </ord:order>\r
+      </ord:placeOrder>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="74890a4d-6354-4eac-bc51-e22b37386031" name="SOAP Response"/><con:assertion type="Simple Contains" id="ea774d7a-2189-44eb-b1d1-fd103d28f339" name="Contains"><con:configuration><token>Accepted order for: 100 stocks of Company C at $200.0</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:placeOrder"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="641a67d1-b6df-404e-b8f3-c42032811d6d" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="testOrderRejectCompanyA" searchProperties="true"><con:settings/><con:testStep type="request" id="f5db2efe-ad5a-4318-8900-71adbb5640bc" name="placeOrder"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>OrderApprovalServiceSoap11Binding</con:interface><con:operation>placeOrder</con:operation><con:request name="placeOrder" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="f40a1831-cd8f-4e12-87f7-d36b30ffd7d0"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ord="http://facts.re.rws.nl/orderApproval" xmlns:fac="http://facts.re.rws.nl">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ord:placeOrder>\r
+         <!--Zero or more repetitions:-->\r
+         <ord:order>\r
+            <!--Optional:-->\r
+            <fac:price>100</fac:price>\r
+            <!--Optional:-->\r
+            <fac:quantity>5</fac:quantity>\r
+            <!--Optional:-->\r
+            <fac:symbol>Company A</fac:symbol>\r
+         </ord:order>\r
+      </ord:placeOrder>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="bfff51ba-27f7-4d8b-ac86-0252241a54b9" name="SOAP Response"/><con:assertion type="Simple Contains" id="46e75ded-0eef-4eb2-a4d9-bc74af0e5866" name="Contains"><con:configuration><token>An Order for stocks of Company A is accepted only if the number of stocks is higher than 10.</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:placeOrder"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="fe5f3944-58a0-4a42-806f-eea10b93e313" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="testOrderRejectCompanyB" searchProperties="true"><con:settings/><con:testStep type="request" id="f5d29270-61fe-488c-ae7a-89436f17cd46" name="placeOrder"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>OrderApprovalServiceSoap11Binding</con:interface><con:operation>placeOrder</con:operation><con:request name="placeOrder" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="b7ecf5cc-8885-41e7-8d00-ee49fe2a1c6b"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ord="http://facts.re.rws.nl/orderApproval" xmlns:fac="http://facts.re.rws.nl">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ord:placeOrder>\r
+         <!--Zero or more repetitions:-->\r
+         <ord:order>\r
+            <!--Optional:-->\r
+            <fac:price>10</fac:price>\r
+            <!--Optional:-->\r
+            <fac:quantity>5</fac:quantity>\r
+            <!--Optional:-->\r
+            <fac:symbol>Company B</fac:symbol>\r
+         </ord:order>\r
+      </ord:placeOrder>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="bf412f03-9860-4516-8f34-b66247052ea9" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:placeOrder"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="6fea5eae-7f32-41d6-9ab2-2c9db0e244d8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="testOrderRejectCompanyC" searchProperties="true"><con:settings/><con:testStep type="request" id="6db7b30e-ad43-40bc-bae5-11727cbdd1e1" name="placeOrder"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>OrderApprovalServiceSoap11Binding</con:interface><con:operation>placeOrder</con:operation><con:request name="placeOrder" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="aba2a433-af8a-4955-b1fc-e7020d4b2ab4"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ord="http://facts.re.rws.nl/orderApproval" xmlns:fac="http://facts.re.rws.nl">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ord:placeOrder>\r
+         <!--Zero or more repetitions:-->\r
+         <ord:order>\r
+            <!--Optional:-->\r
+            <fac:price>10</fac:price>\r
+            <!--Optional:-->\r
+            <fac:quantity>100</fac:quantity>\r
+            <!--Optional:-->\r
+            <fac:symbol>Company C</fac:symbol>\r
+         </ord:order>\r
+      </ord:placeOrder>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="7faf953e-f9d3-4d33-82f3-0e764d7d76ed" name="SOAP Response"/><con:assertion type="Simple Contains" id="d06a54b2-a77b-48f7-991a-dfc4d925660c" name="Contains"><con:configuration><token>An Order for stocks of Company C is accepted only if the stock price is higher than 50 $ and the number of stocks is lower than 200.</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:placeOrder"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>
