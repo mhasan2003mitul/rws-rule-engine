@@ -1,2 +1,6 @@
 /.idea
 /*.iml
+/assembly/target
+/facts/target
+/frontend/target
+/rules/target
