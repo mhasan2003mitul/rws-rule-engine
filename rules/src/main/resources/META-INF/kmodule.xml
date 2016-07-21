@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<kmodule xmlns="http://www.drools.org/xsd/kmodule">
+    <kbase name="kBase" packages="nl.rws.re.rules.orderapproval">
+        <ksession name="session" type="stateful">
+            <fileLogger file="target\kie_sesstion"/>
+                </ksession>
+    </kbase>
+
+    <kbase name="kbaseHuisbouwen" packages="nl.rws.re.rules.housebuilding">
+        <ksession name="huisbouwenSession" type="stateful"/>
+    </kbase>
+</kmodule>

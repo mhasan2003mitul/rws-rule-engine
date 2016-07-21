@@ -1,0 +1,37 @@
+2016-07-11 12:21:38,436 WARN  [SoapUI] Missing folder [D:\workspace_nb_rijkwaterstaat\re-parent\test\backend\functioneel\ext] for external libraries
+2016-07-11 12:21:38,760 INFO  [DefaultSoapUICore] initialized soapui-settings from [C:\Users\Administrator\soapui-settings.xml]
+2016-07-11 12:21:41,963 INFO  [PluginManager] 0 plugins loaded in 2 ms
+2016-07-11 12:21:41,964 INFO  [DefaultSoapUICore] All plugins loaded
+2016-07-11 12:21:42,890 INFO  [WsdlProject] Loaded project from [file:/D:/workspace_nb_rijkwaterstaat/re-parent/test/backend/functioneel/src/test/java/nl/rws/re/test/backend/functioneel/re-parent-soapui-project.xml]
+2016-07-11 12:21:42,898 INFO  [SoapUITestCaseRunner] Running SoapUI tests in project [re-parent]
+2016-07-11 12:21:42,900 INFO  [SoapUITestCaseRunner] Running Project [re-parent], runType = SEQUENTIAL
+2016-07-11 12:21:42,916 INFO  [SoapUITestCaseRunner] Running SoapUI testcase [testOrderAcceptCompanyA]
+2016-07-11 12:21:42,924 INFO  [SoapUITestCaseRunner] running step [placeOrder]
+2016-07-11 12:21:43,805 INFO  [SoapUITestCaseRunner] Assertion [SOAP Response] has status VALID
+2016-07-11 12:21:43,805 INFO  [SoapUITestCaseRunner] Assertion [Contains] has status VALID
+2016-07-11 12:21:43,808 INFO  [SoapUITestCaseRunner] Finished running SoapUI testcase [testOrderAcceptCompanyA], time taken: 868ms, status: FINISHED
+2016-07-11 12:21:43,809 INFO  [SoapUITestCaseRunner] Running SoapUI testcase [testOrderAcceptCompanyB]
+2016-07-11 12:21:43,810 INFO  [SoapUITestCaseRunner] running step [placeOrder]
+2016-07-11 12:21:43,855 INFO  [SoapUITestCaseRunner] Assertion [SOAP Response] has status VALID
+2016-07-11 12:21:43,855 INFO  [SoapUITestCaseRunner] Assertion [Contains] has status VALID
+2016-07-11 12:21:43,856 INFO  [SoapUITestCaseRunner] Finished running SoapUI testcase [testOrderAcceptCompanyB], time taken: 44ms, status: FINISHED
+2016-07-11 12:21:43,857 INFO  [SoapUITestCaseRunner] Running SoapUI testcase [testOrderAcceptCompanyC]
+2016-07-11 12:21:43,858 INFO  [SoapUITestCaseRunner] running step [placeOrder]
+2016-07-11 12:21:43,905 INFO  [SoapUITestCaseRunner] Assertion [SOAP Response] has status VALID
+2016-07-11 12:21:43,905 INFO  [SoapUITestCaseRunner] Assertion [Contains] has status VALID
+2016-07-11 12:21:43,905 INFO  [SoapUITestCaseRunner] Finished running SoapUI testcase [testOrderAcceptCompanyC], time taken: 46ms, status: FINISHED
+2016-07-11 12:21:43,907 INFO  [SoapUITestCaseRunner] Running SoapUI testcase [testOrderRejectCompanyA]
+2016-07-11 12:21:43,908 INFO  [SoapUITestCaseRunner] running step [placeOrder]
+2016-07-11 12:21:43,946 INFO  [SoapUITestCaseRunner] Assertion [SOAP Response] has status VALID
+2016-07-11 12:21:43,947 INFO  [SoapUITestCaseRunner] Assertion [Contains] has status VALID
+2016-07-11 12:21:43,947 INFO  [SoapUITestCaseRunner] Finished running SoapUI testcase [testOrderRejectCompanyA], time taken: 38ms, status: FINISHED
+2016-07-11 12:21:43,948 INFO  [SoapUITestCaseRunner] Running SoapUI testcase [testOrderRejectCompanyB]
+2016-07-11 12:21:43,948 INFO  [SoapUITestCaseRunner] running step [placeOrder]
+2016-07-11 12:21:43,987 INFO  [SoapUITestCaseRunner] Assertion [SOAP Response] has status VALID
+2016-07-11 12:21:43,988 INFO  [SoapUITestCaseRunner] Finished running SoapUI testcase [testOrderRejectCompanyB], time taken: 39ms, status: FINISHED
+2016-07-11 12:21:43,989 INFO  [SoapUITestCaseRunner] Running SoapUI testcase [testOrderRejectCompanyC]
+2016-07-11 12:21:43,989 INFO  [SoapUITestCaseRunner] running step [placeOrder]
+2016-07-11 12:21:44,027 INFO  [SoapUITestCaseRunner] Assertion [SOAP Response] has status VALID
+2016-07-11 12:21:44,028 INFO  [SoapUITestCaseRunner] Assertion [Contains] has status VALID
+2016-07-11 12:21:44,028 INFO  [SoapUITestCaseRunner] Finished running SoapUI testcase [testOrderRejectCompanyC], time taken: 37ms, status: FINISHED
+2016-07-11 12:21:44,029 INFO  [SoapUITestCaseRunner] Project [re-parent] finished with status [FINISHED] in 1122ms

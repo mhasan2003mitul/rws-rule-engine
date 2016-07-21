@@ -1,0 +1,26 @@
+<ruleService
+        name="OrderApprovalService"
+        xmlns="http://wso2.org/carbon/rules"
+        targetNamespace="http://facts.re.rws.nl/orderApproval">
+    <ruleSet>
+        <rule resourceType="dtable" sourceType="file">orderApprovalRules.xlsx</rule>
+        <rule resourceType="regular" sourceType="file">houseBuildingRules.drl</rule>
+    </ruleSet>
+    <operation name="placeOrder">
+        <input wrapperElementName="placeOrder">
+            <fact elementName="order" type="nl.rws.re.facts.order.PlaceOrder"></fact>
+        </input>
+        <output wrapperElementName="placeOrderResponse">
+            <fact elementName="orderStatus" type="nl.rws.re.facts.order.OrderAccept"></fact>
+            <fact elementName="orderReject" type="nl.rws.re.facts.order.OrderReject"></fact>
+        </output>
+    </operation>
+    <operation name="placeHouseBuildingRequest">
+        <input wrapperElementName="placeHouseBuildingRequest">
+            <fact elementName="houseBuildingService" type="nl.rws.re.facts.housebuilding.HouseBuildingService"></fact>
+        </input>
+        <output wrapperElementName="placeHouseBuildingRequestResponse">
+            <fact elementName="serviceReply" type="nl.rws.re.facts.housebuilding.ServiceReply"></fact>
+        </output>
+    </operation>
+</ruleService>

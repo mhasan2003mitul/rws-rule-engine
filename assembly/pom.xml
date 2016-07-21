@@ -26,14 +26,22 @@
                             </includes>
                         </fileSet>
                         <fileset>
-                            <directory>../rules/src/main/java/nl/rws/re/rules/OrderApproval</directory>
+                            <directory>../rules/src/main//resources/nl/rws/re/rules/orderapproval</directory>
                             <outputDirectory>conf</outputDirectory>
                             <includes>
-                                <include>orderApprovalRules.drl</include>
+                                <include>orderApprovalRules.xlsx</include>
                             </includes>    
                         </fileset>
                         <fileset>
-                            <directory>../rules/src/main/java/nl/rws/re/rules/service</directory>
+                            <directory>../rules/src/main//resources/nl/rws/re/rules/housebuilding</directory>
+                            <outputDirectory>conf</outputDirectory>
+                            <includes>
+                                <!--<include>houseBuildingRules.xlsx</include>-->
+                                <include>houseBuildingRules.drl</include>
+                            </includes>
+                        </fileset>
+                        <fileset>
+                            <directory>../rules/src/main/resources/nl/rws/re/rules/service</directory>
                             <outputDirectory>META-INF/</outputDirectory>             
                             <includes>
                                 <include>

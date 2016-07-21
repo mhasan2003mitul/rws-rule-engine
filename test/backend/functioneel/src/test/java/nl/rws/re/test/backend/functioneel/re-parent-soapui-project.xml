@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="57b6dbf7-0c76-4cec-bdf0-d15f9ee8f0c7" activeEnvironment="Default" name="re-parent" soapui-version="5.2.1" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+<con:soapui-project id="57b6dbf7-0c76-4cec-bdf0-d15f9ee8f0c7" activeEnvironment="Default" name="re-parent" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
   <con:entry key="Environment" value="Default"/>
   <con:entry key="Global Properties" value=""/>
   <con:entry key="TestSuite" value="&lt;all>"/>
@@ -163,18 +163,18 @@
       <http:address location="http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpEndpoint/"/>
     </wsdl:port>
   </wsdl:service>
-</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpSoap11Endpoint/</con:endpoint><con:endpoint>https://172.31.145.87:9458/services/OrderApprovalService.OrderApprovalServiceHttpsSoap11Endpoint/</con:endpoint></con:endpoints><con:operation id="840b494c-e773-4a7b-8be0-0fb2ef21a3ce" isOneWay="false" action="urn:placeOrder" name="placeOrder" bindingOperationName="placeOrder" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7047c12a-028e-4ada-9f33-5d52da6f524e" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ord="http://facts.re.rws.nl/orderApproval" xmlns:fac="http://facts.re.rws.nl">\r
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpSoap11Endpoint/</con:endpoint><con:endpoint>https://172.31.145.87:9458/services/OrderApprovalService.OrderApprovalServiceHttpsSoap11Endpoint/</con:endpoint></con:endpoints><con:operation id="840b494c-e773-4a7b-8be0-0fb2ef21a3ce" isOneWay="false" action="urn:placeOrder" name="placeOrder" bindingOperationName="placeOrder" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7047c12a-028e-4ada-9f33-5d52da6f524e" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://172.31.145.87:9778/services/OrderApprovalService.OrderApprovalServiceHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ord="http://facts.re.rws.nl/orderApproval" xmlns:fac="http://facts.re.rws.nl">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ord:placeOrder>\r
          <!--Zero or more repetitions:-->\r
          <ord:order>\r
             <!--Optional:-->\r
-            <fac:price>?</fac:price>\r
+            <fac:price>100</fac:price>\r
             <!--Optional:-->\r
-            <fac:quantity>?</fac:quantity>\r
+            <fac:quantity>100</fac:quantity>\r
             <!--Optional:-->\r
-            <fac:symbol>?</fac:symbol>\r
+            <fac:symbol>Company A</fac:symbol>\r
          </ord:order>\r
       </ord:placeOrder>\r
    </soapenv:Body>\r

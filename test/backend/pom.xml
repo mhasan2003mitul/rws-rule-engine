@@ -15,5 +15,6 @@
 
     <modules>
         <module>functioneel</module>
+        <module>unit</module>
     </modules>
 </project>
