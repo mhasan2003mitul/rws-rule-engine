@@ -1,4 +1,4 @@
-package nl.rws.rb.frontend;
+package nl.rws.re.frontend;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.Path;
@@ -14,7 +14,7 @@ public class ReRESTApplication extends Application{
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new HashSet<Class<?>>();
-        resources.add(Object.class);
+        resources.add(DakkapelService.class);
         return resources;
     }
 }

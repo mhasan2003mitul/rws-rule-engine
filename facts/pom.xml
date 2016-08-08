@@ -6,6 +6,8 @@
         <artifactId>re-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>re-facts</artifactId>
+    <groupId>nl.rws.re</groupId>
+    <artifactId>facts</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 </project>

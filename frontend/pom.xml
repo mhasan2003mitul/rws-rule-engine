@@ -17,13 +17,17 @@
             <artifactId>javax.ws.rs-api</artifactId>
             <version>RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>nl.rws.re</groupId>
+            <artifactId>facts</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
-                <version>2.4.1</version>
                 <executions>
                     <execution>
                         <id>GenerateBackendClient</id>
@@ -31,6 +35,7 @@
                             <goal>wsimport</goal>
                         </goals>
                         <configuration>
+                            <wsdlLocation>/wsdl/backend.wsdl</wsdlLocation>
                             <wsdlDirectory>src/main/resources/wsdl</wsdlDirectory>
                             <wsdlFiles>
                                 <wsdlFile>backend.wsdl</wsdlFile>
@@ -39,16 +44,10 @@
                             <vmArgs>
                                 <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
                             </vmArgs>
-                            <args>
-                                <arg>-B-XautoNameResolution</arg>
-                            </args>
-                            <verbose>true</verbose>
-
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
-
 </project>

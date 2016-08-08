@@ -1,0 +1,108 @@
+package nl.rws.re.rules.dakkapel;
+import nl.rws.re.facts.dakkapel.Grondslag;
+import nl.rws.re.facts.dakkapel.Vraag;
+import nl.rws.re.facts.dakkapel.Step;
+import nl.rws.re.facts.dakkapel.GebruikerVragenVoorElkGrondslag;
+import function nl.rws.re.facts.dakkapel.DakkapelUtil.krijgtStepVragen;
+import nl.rws.re.facts.dakkapel.DakkapelUtil;
+import nl.rws.re.facts.dakkapel.GebruikerVragen;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry
+import java.util.Collections;
+dialect  "mvel"
+
+//function List<Vraag> heeftAfhangelijkheden(Vraag vraag){
+//    List<Vraag> vragen = new ArrayList<>();
+//    if(vraag.getAfhankelijkheden() !=null && vraag.getAfhankelijkheden().size() > 0){
+//        for(Vraag afhankelijkhedenVraag: vraag.getAfhankelijkheden()){
+//            vragen.addAll(heeftAfhangelijkheden(afhankelijkhedenVraag));
+//        }
+//    }
+//    if(vraag.getAntwoord() == null){
+////        System.out.println(vraag.getVraag());
+//        vragen.add(vraag);
+//    }
+//    return vragen;
+//}
+//
+//function void heeftAfhangelijkhedenMetGrondslag(Grondslag grondslag,Vraag vraag,GebruikerVragenVoorElkGrondslag gebruikerGebruikerVragenElkGrondslag){
+//    if(vraag.getAfhankelijkheden() !=null && vraag.getAfhankelijkheden().size() > 0){
+//        for(Vraag afhankelijkhedenVraag: vraag.getAfhankelijkheden()){
+//            heeftAfhangelijkhedenMetGrondslag(grondslag,afhankelijkhedenVraag,gebruikerGebruikerVragenElkGrondslag);
+//        }
+//    }
+//    if(vraag.getAntwoord() == null){
+//        if(!gebruikerGebruikerVragenElkGrondslag.getGebruikerGrondslagVragenMap().containsKey(grondslag)){
+//            gebruikerGebruikerVragenElkGrondslag.getGebruikerGrondslagVragenMap().put(grondslag,new ArrayList<Vraag>());
+//        }
+//        ((List<Vraag>)gebruikerGebruikerVragenElkGrondslag.getGebruikerGrondslagVragenMap().get(grondslag)).add(vraag);
+//        System.out.println("Grondslag: "+grondslag.getGrondslagBeschrijving()+": "+vraag.getVraag());
+//    }
+//}
+//
+//function GebruikerVragenVoorElkGrondslag krijgtGrondslagVragen(List grondslagen){
+//    Map<Grondslag,List<Vraag>> grondslagVragen = new HashMap<>();
+//    for(Object grondslag : grondslagen){
+//        for(Vraag vraag: ((Grondslag)grondslag).getVragen()){
+//            grondslagVragen.put(((Grondslag)grondslag),heeftAfhangelijkheden(vraag));
+//        }
+//    }
+////    for (Entry entry: grondslagVragen.entrySet()){
+////        System.out.println(((Grondslag)entry.getKey()).getGrondslagBeschrijving());
+////        for (Vraag vraag: (List<Vraag>)entry.getValue()){
+////            System.out.println(vraag.getVraag());
+////        }
+////    }
+//    GebruikerVragenVoorElkGrondslag gv = new GebruikerVragenVoorElkGrondslag();
+//    gv.setGebruikerGrondslagVragenMap(grondslagVragen);
+//    return gv;
+//}
+//
+//function List krijgtStepVragen(List stepen){
+//    List<GebruikerVragenVoorElkGrondslag> gebruikerGebruikerVragenElkGrondslags = new ArrayList<>();
+//    for(Object stepObj : stepen){
+//        gebruikerGebruikerVragenElkGrondslags.add(crawlingStep((Step)stepObj));
+//    }
+//    return gebruikerGebruikerVragenElkGrondslags;
+//}
+//
+//function GebruikerVragenVoorElkGrondslag crawlingStep(Step step){
+//    System.out.println(step.getStepBeschrijven());
+//    for(Step verderStep : step.getSteps()){
+//        crawlingStep(verderStep);
+//    }
+//    for(Object entryObj : krijgtGrondslagVragen(step.getGrondslags()).getGebruikerGrondslagVragenMap().entrySet()){
+//        Entry<Grondslag,List<Vraag>> entry = (Entry<Grondslag,List<Vraag>>)entryObj;
+//        System.out.println(entry.getKey().getGrondslagBeschrijving());
+//        for (Vraag vraag : entry.getValue()) {
+//            System.out.println("\t\t\t\t"+vraag.getVraag());
+//        }
+//    }
+//    return krijgtGrondslagVragen(step.getGrondslags());
+//}
+//rule "Welke vragen zijn antwoord nodig?"
+//    when
+//        $grondslagen: List(size()>0) from collect(Grondslag()) or $grondslagen: List(size() > 0)
+//    then
+//        insert(krijgtGrondslagVragen($grondslagen));
+//end
+
+rule "Welke vragen hebbeb geen antwoord?" no-loop true
+    when
+        $stepen: List(size()>0) from collect(Step()) or $stepen: List(size() > 0)
+    then
+        System.out.println("Step size: "+$stepen.size());
+        insert(krijgtStepVragen($stepen));
+end
+
+rule "Als alles vragen antwoord heeft dan wat is de denifitief beslissing?" no-loop true
+    when
+        not(GebruikerVragen(gebruikerVragenVoorElkGrondslags.size() > 0))
+        $stepen: List(size()>0) from collect(Step()) or $stepen: List(size() > 0)
+    then
+        System.out.println("Step size: "+$stepen.size());
+        new DakkapelUtil().berekenenDenifitiefBeslissing($stepen);
+end

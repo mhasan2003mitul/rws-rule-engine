@@ -5,6 +5,7 @@ import nl.rws.re.facts.details.ApplicantDetail;
 import nl.rws.re.facts.details.Information;
 import nl.rws.re.facts.housebuilding.HouseBuildingService;
 import nl.rws.re.facts.housebuilding.ServiceReply;
+import nl.rws.re.facts.housebuilding.TypeOfLand;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Assert;
@@ -25,7 +26,7 @@ import org.kie.api.runtime.KieSession;
  */
 
 public class HouseBuildingTest {
-    private final static String KIE_SESSION_NAME = "huisbouwenSession";
+    private final static String KIE_SESSION_NAME = "houseBuildingSession";
     private KieSession kieSession;
 
 
@@ -38,11 +39,11 @@ public class HouseBuildingTest {
 
         kieSession = kieContainer.newKieSession(KIE_SESSION_NAME);
 
-//        kieSession.addEventListener(new DebugAgendaEventListener());
+        kieSession.addEventListener(new DebugAgendaEventListener());
     }
 
     @After
-    public void teadDown(){
+    public void tearDown(){
         kieSession.dispose();
     }
 
@@ -55,50 +56,223 @@ public class HouseBuildingTest {
     }
 
     @Test
-    public void testApplicantDetailRequiredForHouseBuildingRequest() {
-        kieSession.insert(new HouseBuildingService());
+    public void testApplicantAddressRequiredForHouseBuildingRequest() {
+        HouseBuildingService houseBuildingService = new HouseBuildingService();
+        Address address = new Address("Abc","60","3456HT","ABC");
+        houseBuildingService.setNewHouseBuildingLocationAddress(address);
+
+        kieSession.insert(houseBuildingService);
+
         int totalRulesExecuted = kieSession.fireAllRules();
         Assert.assertThat(2, Matchers.equalTo(totalRulesExecuted));
-        Assert.assertTrue(kieSession.getObjects().toArray()[0] instanceof ServiceReply);
-        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[0]).getMessage().equals("Applicant details should be provided in house building service request."));
+        Assert.assertTrue(kieSession.getObjects().toArray()[1] instanceof ServiceReply);
+        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[1]).getMessage().equals("Applicant address[street name, house number, post code, city] should be provided."));
     }
 
     @Test
-    public void testInformationRequiredForApplicantDetail() {
+    public void testApplicantNewHouseBuildingLocationAddressRequiredForHouseBuildingRequest() {
         HouseBuildingService houseBuildingService = new HouseBuildingService();
-        houseBuildingService.setApplicantDetail(new ApplicantDetail());
+        Address address = new Address("Abc","60","3456HT","ABC");
+        houseBuildingService.setApplicantCurrentAddress(address);
+
         kieSession.insert(houseBuildingService);
+
         int totalRulesExecuted = kieSession.fireAllRules();
         Assert.assertThat(2, Matchers.equalTo(totalRulesExecuted));
-        Assert.assertTrue(kieSession.getObjects().toArray()[0] instanceof ServiceReply);
-        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[0]).getMessage().equals("Applicant information should be provided in applicant detail."));
+        Assert.assertTrue(kieSession.getObjects().toArray()[1] instanceof ServiceReply);
+        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[1]).getMessage().equals("Applicant new house building location address[street name, house number, post code, city] should be provided."));
     }
 
     @Test
-    public void testAddressRequiredForInformation() {
+    public void testApplicantNewHouseBuildingLocationAddressFiledPartiallyNull() {
         HouseBuildingService houseBuildingService = new HouseBuildingService();
-        ApplicantDetail applicantDetail = new ApplicantDetail();
-        applicantDetail.setInformation(new Information());
-        houseBuildingService.setApplicantDetail(applicantDetail);
+        houseBuildingService.setNewHouseBuildingLocationAddress(new Address(null,"60","3456HT",null));
+        houseBuildingService.setApplicantCurrentAddress(new Address("Abc","60","3456HT","ABC"));
+
         kieSession.insert(houseBuildingService);
+
+
         int totalRulesExecuted = kieSession.fireAllRules();
         Assert.assertThat(2, Matchers.equalTo(totalRulesExecuted));
-        Assert.assertTrue(kieSession.getObjects().toArray()[0] instanceof ServiceReply);
-        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[0]).getMessage().equals("Applicant address should be provided in application information."));
+        Assert.assertTrue(kieSession.getObjects().toArray()[1] instanceof ServiceReply);
+        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[1]).getMessage().equals("Stree Name, House Number, Post Code and City should be provided in address."));
     }
 
     @Test
-    public void testStree_HouseNumber_Postcode_CityRequiredForAddress() {
+    public void testApplicantAddressFiledPartiallyNull() {
         HouseBuildingService houseBuildingService = new HouseBuildingService();
-        ApplicantDetail applicantDetail = new ApplicantDetail();
-        Information information = new Information();
-        information.setAddress(new Address());
-        applicantDetail.setInformation(information);
-        houseBuildingService.setApplicantDetail(applicantDetail);
+
+        houseBuildingService.setApplicantCurrentAddress(new Address(null,"60","3456HT",null));
+        houseBuildingService.setNewHouseBuildingLocationAddress(new Address("Abc","60","3456HT","ABC"));
+
         kieSession.insert(houseBuildingService);
+
+
+        int totalRulesExecuted = kieSession.fireAllRules();
+        Assert.assertThat(2, Matchers.equalTo(totalRulesExecuted));
+        Assert.assertTrue(kieSession.getObjects().toArray()[1] instanceof ServiceReply);
+        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[1]).getMessage().equals("Stree Name, House Number, Post Code and City should be provided in address."));
+    }
+
+    @Test
+    public void testTypeOfLand() {
+        HouseBuildingService houseBuildingService = new HouseBuildingService();
+
+        houseBuildingService.setApplicantCurrentAddress(new Address("Abc","60","3456HT","Abc"));
+        houseBuildingService.setNewHouseBuildingLocationAddress(new Address("Abc","60","3456HT","ABC"));
+
+        kieSession.insert(houseBuildingService);
+
+
         int totalRulesExecuted = kieSession.fireAllRules();
         Assert.assertThat(2, Matchers.equalTo(totalRulesExecuted));
         Assert.assertTrue(kieSession.getObjects().toArray()[0] instanceof ServiceReply);
-        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[0]).getMessage().equals("Stree Name, House Number, Post Code and City should be provided in address."));
+        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[0]).getMessage().equals("What is the type of the land?"));
+    }
+
+    @Test
+    public void testDeepOfLowLand() {
+        HouseBuildingService houseBuildingService = new HouseBuildingService();
+
+        houseBuildingService.setApplicantCurrentAddress(new Address("Abc","60","3456HT","Abc"));
+        houseBuildingService.setNewHouseBuildingLocationAddress(new Address("Abc","60","3456HT","ABC"));
+        houseBuildingService.setTypeOfTheLand("LOW");
+
+        kieSession.insert(houseBuildingService);
+
+
+        int totalRulesExecuted = kieSession.fireAllRules();
+        Assert.assertThat(3, Matchers.equalTo(totalRulesExecuted));
+        Assert.assertTrue(kieSession.getObjects().toArray()[0] instanceof ServiceReply);
+        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[0]).getMessage().equals("How deep is the land?"));
+    }
+
+    @Test
+    public void testAltitudeOfHighLand() {
+        HouseBuildingService houseBuildingService = new HouseBuildingService();
+
+        houseBuildingService.setApplicantCurrentAddress(new Address("Abc","60","3456HT","Abc"));
+        houseBuildingService.setNewHouseBuildingLocationAddress(new Address("Abc","60","3456HT","ABC"));
+        houseBuildingService.setTypeOfTheLand("HIGH");
+
+        kieSession.insert(houseBuildingService);
+
+
+        int totalRulesExecuted = kieSession.fireAllRules();
+        Assert.assertThat(3, Matchers.equalTo(totalRulesExecuted));
+        Assert.assertTrue(kieSession.getObjects().toArray()[0] instanceof ServiceReply);
+        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[0]).getMessage().equals("What is the altitude of the high land?"));
+    }
+
+    @Test
+    public void testSizeOfLowLand() {
+        HouseBuildingService houseBuildingService = new HouseBuildingService();
+
+        houseBuildingService.setApplicantCurrentAddress(new Address("Abc","60","3456HT","Abc"));
+        houseBuildingService.setNewHouseBuildingLocationAddress(new Address("Abc","60","3456HT","ABC"));
+        houseBuildingService.setTypeOfTheLand("LOW");
+        houseBuildingService.setDeep(50);
+
+        kieSession.insert(houseBuildingService);
+
+
+        int totalRulesExecuted = kieSession.fireAllRules();
+        Assert.assertThat(3, Matchers.equalTo(totalRulesExecuted));
+        Assert.assertTrue(kieSession.getObjects().toArray()[0] instanceof ServiceReply);
+        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[0]).getMessage().equals("How big is the land?"));
+    }
+
+    @Test
+    public void testSizeOfHighLand() {
+        HouseBuildingService houseBuildingService = new HouseBuildingService();
+
+        houseBuildingService.setApplicantCurrentAddress(new Address("Abc","60","3456HT","Abc"));
+        houseBuildingService.setNewHouseBuildingLocationAddress(new Address("Abc","60","3456HT","ABC"));
+        houseBuildingService.setTypeOfTheLand("HIGH");
+        houseBuildingService.setAltitude(50);
+
+        kieSession.insert(houseBuildingService);
+
+
+        int totalRulesExecuted = kieSession.fireAllRules();
+        Assert.assertThat(3, Matchers.equalTo(totalRulesExecuted));
+        Assert.assertTrue(kieSession.getObjects().toArray()[0] instanceof ServiceReply);
+        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[0]).getMessage().equals("What is the size of the high land?"));
+    }
+
+    @Test
+    public void testAcceptRuleToBuildHouseInLowLand() {
+        HouseBuildingService houseBuildingService = new HouseBuildingService();
+
+        houseBuildingService.setApplicantCurrentAddress(new Address("Abc","60","3456HT","Abc"));
+        houseBuildingService.setNewHouseBuildingLocationAddress(new Address("Abc","60","3456HT","ABC"));
+        houseBuildingService.setTypeOfTheLand("LOW");
+        houseBuildingService.setDeep(40);
+        houseBuildingService.setSize(40);
+
+        kieSession.insert(houseBuildingService);
+
+
+        int totalRulesExecuted = kieSession.fireAllRules();
+        Assert.assertThat(3, Matchers.equalTo(totalRulesExecuted));
+        Assert.assertTrue(kieSession.getObjects().toArray()[0] instanceof ServiceReply);
+        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[0]).getMessage().equals("Allowed to build a house."));
+    }
+
+    @Test
+    public void testAcceptRuleToBuildHouseInHighLand() {
+        HouseBuildingService houseBuildingService = new HouseBuildingService();
+
+        houseBuildingService.setApplicantCurrentAddress(new Address("Abc","60","3456HT","Abc"));
+        houseBuildingService.setNewHouseBuildingLocationAddress(new Address("Abc","60","3456HT","ABC"));
+        houseBuildingService.setTypeOfTheLand("HIGH");
+        houseBuildingService.setAltitude(40);
+        houseBuildingService.setSize(40);
+
+        kieSession.insert(houseBuildingService);
+
+
+        int totalRulesExecuted = kieSession.fireAllRules();
+        Assert.assertThat(3, Matchers.equalTo(totalRulesExecuted));
+        Assert.assertTrue(kieSession.getObjects().toArray()[0] instanceof ServiceReply);
+        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[0]).getMessage().equals("Allowed to build a house."));
+    }
+
+    @Test
+    public void testRejectRuleToBuildHouseInLowLand() {
+        HouseBuildingService houseBuildingService = new HouseBuildingService();
+
+        houseBuildingService.setApplicantCurrentAddress(new Address("Abc","60","3456HT","Abc"));
+        houseBuildingService.setNewHouseBuildingLocationAddress(new Address("Abc","60","3456HT","ABC"));
+        houseBuildingService.setTypeOfTheLand(TypeOfLand.LOW.name());
+        houseBuildingService.setDeep(40);
+        houseBuildingService.setSize(100);
+
+        kieSession.insert(houseBuildingService);
+
+
+        int totalRulesExecuted = kieSession.fireAllRules();
+        Assert.assertThat(3, Matchers.equalTo(totalRulesExecuted));
+        Assert.assertTrue(kieSession.getObjects().toArray()[0] instanceof ServiceReply);
+        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[0]).getMessage().equals("Not allowed to build a house."));
+    }
+
+    @Test
+    public void testRejectRuleToBuildHouseInHighLand() {
+        HouseBuildingService houseBuildingService = new HouseBuildingService();
+
+        houseBuildingService.setApplicantCurrentAddress(new Address("Abc","60","3456HT","Abc"));
+        houseBuildingService.setNewHouseBuildingLocationAddress(new Address("Abc","60","3456HT","ABC"));
+        houseBuildingService.setTypeOfTheLand(TypeOfLand.HIGH.name());
+        houseBuildingService.setAltitude(40);
+        houseBuildingService.setSize(100);
+
+        kieSession.insert(houseBuildingService);
+
+
+        int totalRulesExecuted = kieSession.fireAllRules();
+        Assert.assertThat(3, Matchers.equalTo(totalRulesExecuted));
+        Assert.assertTrue(kieSession.getObjects().toArray()[0] instanceof ServiceReply);
+        Assert.assertTrue(((ServiceReply)kieSession.getObjects().toArray()[0]).getMessage().equals("Not allowed to build a house."));
     }
 }

@@ -6,7 +6,14 @@
                 </ksession>
     </kbase>
 
-    <kbase name="kbaseHuisbouwen" packages="nl.rws.re.rules.housebuilding">
-        <ksession name="huisbouwenSession" type="stateful"/>
+    <kbase  name="kbaseHuisbouwen" packages="nl.rws.re.rules.housebuilding">
+        <ksession name="houseBuildingSession" type="stateful"/>
     </kbase>
+
+    <kbase name="kBaseDakkapel" packages="nl.rws.re.rules.dakkapel">
+        <ksession name="dakkapelSession" type="stateful">
+            <fileLogger file="target\kie_sesstion"/>
+        </ksession>
+    </kbase>
+
 </kmodule>

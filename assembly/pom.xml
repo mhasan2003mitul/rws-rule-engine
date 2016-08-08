@@ -16,28 +16,35 @@
                 <version>1.6.3</version>
                 <configuration>
                     <includeDependencies>false</includeDependencies>
-                    <aarName>OrderApprovalService</aarName>
+                    <aarName>DakkapelService</aarName>
                     <fileSets>
                         <fileSet>
                             <directory>../facts/target</directory>
                             <outputDirectory>lib</outputDirectory>
                             <includes>
-                                <include>re-facts-1.0-SNAPSHOT.jar</include>
+                                <include>facts-1.0-SNAPSHOT.jar</include>
                             </includes>
                         </fileSet>
                         <fileset>
-                            <directory>../rules/src/main//resources/nl/rws/re/rules/orderapproval</directory>
+                            <directory>../rules/src/main/resources/nl/rws/re/rules/orderapproval</directory>
                             <outputDirectory>conf</outputDirectory>
                             <includes>
                                 <include>orderApprovalRules.xlsx</include>
                             </includes>    
                         </fileset>
                         <fileset>
-                            <directory>../rules/src/main//resources/nl/rws/re/rules/housebuilding</directory>
+                            <directory>../rules/src/main/resources/nl/rws/re/rules/housebuilding</directory>
                             <outputDirectory>conf</outputDirectory>
                             <includes>
                                 <!--<include>houseBuildingRules.xlsx</include>-->
                                 <include>houseBuildingRules.drl</include>
+                            </includes>
+                        </fileset>
+                        <fileset>
+                            <directory>../rules/src/main/resources/nl/rws/re/rules/dakkapel</directory>
+                            <outputDirectory>conf</outputDirectory>
+                            <includes>
+                                <include>*.drl</include>
                             </includes>
                         </fileset>
                         <fileset>

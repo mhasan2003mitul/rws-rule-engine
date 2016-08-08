@@ -2,16 +2,17 @@ package nl.rws.re.rules.housebuilding;
  
 import nl.rws.re.facts.housebuilding.HouseBuildingService;
 import nl.rws.re.facts.housebuilding.ServiceReply;
-import nl.rws.re.facts.details.ApplicantDetail;
-import nl.rws.re.facts.details.Information;
 import nl.rws.re.facts.details.Address;
+import nl.rws.re.facts.housebuilding.HouseBuildingServiceRequestValidated;
 
  /**
   * @author Mainul
   *
   */
 
-rule "House Building Approve Rule" dialect "mvel" no-loop true
+rule "House Building Approve Rule" dialect "mvel"
+no-loop true
+salience 10
 when
     not (HouseBuildingService())
     not(ServiceReply())
@@ -20,48 +21,178 @@ then
 end
 
 rule "Validate all required field are given" dialect "mvel"
+salience 9
 when
     HouseBuildingService()
 then
+    HouseBuildingServiceRequestValidated validated = new HouseBuildingServiceRequestValidated();
+    validated.setValidated(true);
+    insert(validated);
     drools.setFocus("check-required-field");
 end
 
-rule "Is applicant details provided in house building request?" dialect "mvel" agenda-group "check-required-field"
+rule "Is applicant current address provided in application?" dialect "mvel"
+agenda-group "check-required-field"
 when
-    $houserBuildingService:HouseBuildingService(applicantDetail == null)
+    $isValidated:HouseBuildingServiceRequestValidated(validated == true);
+    $houserBuildingService:HouseBuildingService(applicantCurrentAddress == null)
 then
-    insert(new ServiceReply("Applicant details should be provided in house building service request."));
+    insert(new ServiceReply("Applicant address[street name, house number, post code, city] should be provided."));
     retract($houserBuildingService);
+    modify($isValidated){
+        setValidated(false)
+    };
 end
 
-rule "Is applicant information provided in applicant detail?" dialect "mvel" agenda-group "check-required-field"
+rule "Is applicant new house building location address provided in application?" dialect "mvel"
+agenda-group "check-required-field"
 when
-    $houserBuildingService:HouseBuildingService($applicantDetail:applicantDetail)
-    ApplicantDetail(information == null) from $applicantDetail
+    $isValidated:HouseBuildingServiceRequestValidated(validated == true);
+    $houserBuildingService:HouseBuildingService(newHouseBuildingLocationAddress == null)
 then
-    insert(new ServiceReply("Applicant information should be provided in applicant detail."));
+    insert(new ServiceReply("Applicant new house building location address[street name, house number, post code, city] should be provided."));
     retract($houserBuildingService);
+    modify($isValidated){
+        setValidated(false)
+    };
 end
 
-rule "Is applicant address provided in applicant information?" dialect "mvel" agenda-group "check-required-field"
+rule "Does applicant address contain all values?" dialect "mvel"
+agenda-group "check-required-field"
 when
-    $houserBuildingService:HouseBuildingService($applicantDetail:applicantDetail)
-    ApplicantDetail($information:information ) from $applicantDetail
-    Information(address == null) from $information
-then
-    insert(new ServiceReply("Applicant address should be provided in application information."));
-    retract($houserBuildingService);
-end
-
-rule "Does applicant address contain all values?" dialect "mvel" agenda-group "check-required-field"
-when
-    $houserBuildingService:HouseBuildingService($applicantDetail:applicantDetail)
-    ApplicantDetail($information:information ) from $applicantDetail
-    Information($address:address) from $information
-    Address(streetName == null || houseNumber == null || postCode == null || city == null ) from $address
+    $isValidated:HouseBuildingServiceRequestValidated(validated == true);
+    $houserBuildingService:HouseBuildingService($applicantCurrentAddress:applicantCurrentAddress)
+    Address(streetName == null || houseNumber == null || postCode == null || city == null ) from $applicantCurrentAddress
 then
     insert(new ServiceReply("Stree Name, House Number, Post Code and City should be provided in address."));
     retract($houserBuildingService);
+    modify($isValidated){
+        setValidated(false)
+    };
 end
 
+rule "Does applicant new house building location address contain all values?" dialect "mvel"
+agenda-group "check-required-field"
+when
+    $isValidated:HouseBuildingServiceRequestValidated(validated == true);
+    $houserBuildingService:HouseBuildingService($newHouseBuildingLocationAddress:newHouseBuildingLocationAddress)
+    Address(streetName == null || houseNumber == null || postCode == null || city == null ) from $newHouseBuildingLocationAddress
+then
+    insert(new ServiceReply("Stree Name, House Number, Post Code and City should be provided in address."));
+    retract($houserBuildingService);
+    modify($isValidated){
+        setValidated(false)
+    };
+end
 
+rule "Is new house location low land?" dialect "mvel"
+salience 8
+when
+    $isValidated:HouseBuildingServiceRequestValidated(validated == true)
+    $houserBuildingService:HouseBuildingService(typeOfTheLand == null)
+then
+    insert(new ServiceReply("What is the type of the land?"));
+    retract($houserBuildingService);
+    retract($isValidated);
+end
+
+rule "If low land" dialect "mvel"
+salience 7
+when
+    $isValidated:HouseBuildingServiceRequestValidated(validated == true)
+    $houserBuildingService:HouseBuildingService(typeOfTheLand == "LOW")
+then
+
+    drools.setFocus("rules-for-low-land");
+end
+
+rule "If high land" dialect "mvel"
+salience 6
+when
+    $isValidated:HouseBuildingServiceRequestValidated(validated == true)
+    $houserBuildingService:HouseBuildingService(typeOfTheLand == "HIGH")
+then
+    drools.setFocus("rules-for-high-land");
+end
+
+rule "What is the alltitude of the land?" dialect "mvel" agenda-group "rules-for-high-land"
+when
+    $isValidated:HouseBuildingServiceRequestValidated(validated == true)
+    $houserBuildingService:HouseBuildingService(altitude == 0)
+then
+    insert(new ServiceReply("What is the altitude of the high land?"));
+    retract($houserBuildingService);
+    retract($isValidated);
+end
+
+rule "What is the size of the land?" dialect "mvel" agenda-group "rules-for-high-land"
+when
+    $isValidated:HouseBuildingServiceRequestValidated(validated == true)
+    $houserBuildingService:HouseBuildingService(altitude != 0, size == 0)
+then
+    insert(new ServiceReply("What is the size of the high land?"));
+    retract($houserBuildingService);
+    retract($isValidated);
+end
+
+rule "Accept rule to build house in high land" dialect "mvel" agenda-group "rules-for-high-land"
+when
+    $isValidated:HouseBuildingServiceRequestValidated(validated == true)
+    $houserBuildingService:HouseBuildingService(altitude > 0, altitude < 50, size > 0 , size < 50)
+then
+    insert(new ServiceReply("Allowed to build a house."));
+    retract($houserBuildingService);
+    retract($isValidated);
+end
+
+rule "Reject rule to build house in high land" dialect "mvel" agenda-group "rules-for-high-land"
+when
+    $isValidated:HouseBuildingServiceRequestValidated(validated == true)
+    $houserBuildingService:HouseBuildingService(size >= 50)
+then
+    insert(new ServiceReply("Not allowed to build a house."));
+    retract($houserBuildingService);
+    retract($isValidated);
+end
+
+rule "How deep is the land?" dialect "mvel" agenda-group "rules-for-low-land"
+when
+    $isValidated:HouseBuildingServiceRequestValidated(validated == true)
+    $houserBuildingService:HouseBuildingService(typeOfTheLand == "LOW",deep == 0)
+then
+    insert(new ServiceReply("How deep is the land?"));
+    retract($houserBuildingService);
+    retract($isValidated);
+end
+
+rule "How big is the land?" dialect "mvel" agenda-group "rules-for-low-land"
+when
+    $isValidated:HouseBuildingServiceRequestValidated(validated == true)
+    $houserBuildingService:HouseBuildingService(typeOfTheLand == "LOW",deep != 0,size == 0)
+
+then
+    insert(new ServiceReply("How big is the land?"));
+    retract($houserBuildingService);
+    retract($isValidated);
+end
+
+rule "Accept request for low land" dialect "mvel" agenda-group "rules-for-low-land"
+when
+    $isValidated:HouseBuildingServiceRequestValidated(validated == true)
+    $houserBuildingService:HouseBuildingService(typeOfTheLand == "LOW",deep < 50, deep > 0,size < 50, size > 0)
+
+then
+    insert(new ServiceReply("Allowed to build a house."));
+    retract($houserBuildingService);
+    retract($isValidated);
+end
+
+rule "Reject request for low land" dialect "mvel" agenda-group "rules-for-low-land"
+when
+    $isValidated:HouseBuildingServiceRequestValidated(validated == true)
+    $houserBuildingService:HouseBuildingService(typeOfTheLand == "LOW",size > 50)
+then
+    insert(new ServiceReply("Not allowed to build a house."));
+    retract($houserBuildingService);
+    retract($isValidated);
+end

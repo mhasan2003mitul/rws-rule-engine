@@ -7,7 +7,9 @@
         <artifactId>re-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>re-rules</artifactId>
+    <groupId>nl.rws.re</groupId>
+    <artifactId>rules</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
