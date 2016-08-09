@@ -12,7 +12,11 @@
 
     <kbase name="kBaseDakkapel" packages="nl.rws.re.rules.dakkapel">
         <ksession name="dakkapelSession" type="stateful">
-            <fileLogger file="target\kie_sesstion"/>
+        </ksession>
+    </kbase>
+
+    <kbase name="kBaseDakkapelEx" packages="nl.rws.re.rules.dakkapelex">
+        <ksession name="dakkapelExSession" type="stateful">
         </ksession>
     </kbase>
 

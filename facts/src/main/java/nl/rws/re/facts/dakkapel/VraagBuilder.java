@@ -19,7 +19,7 @@ public class VraagBuilder {
         return this;
     }
 
-    public VraagBuilder metAfhankelijkheden(List<Vraag> afhankelijkheden){
+    public VraagBuilder metAfhankelijkheden(Vraag[] afhankelijkheden){
         this.vraag.setAfhankelijkheden(afhankelijkheden);
         return this;
     }

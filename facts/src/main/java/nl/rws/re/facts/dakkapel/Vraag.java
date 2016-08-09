@@ -17,7 +17,7 @@ public class Vraag {
     @XmlElement
     private String vraag;
     @XmlElement
-    private List<Vraag> afhankelijkheden;
+    private Vraag[] afhankelijkheden;
     @XmlElement
     private String antwoordType;
     @XmlElement
@@ -29,7 +29,7 @@ public class Vraag {
 
     }
 
-    public Vraag(String vraag, List<Vraag> afhankelijkheden, String antwoordType, String antwoordSource, String antwoord) {
+    public Vraag(String vraag, Vraag[] afhankelijkheden, String antwoordType, String antwoordSource, String antwoord) {
         this.vraag = vraag;
         this.afhankelijkheden = afhankelijkheden;
         this.antwoordType = antwoordType;
@@ -45,11 +45,11 @@ public class Vraag {
         this.vraag = vraag;
     }
 
-    public List<Vraag> getAfhankelijkheden() {
+    public Vraag[] getAfhankelijkheden() {
         return afhankelijkheden;
     }
 
-    public void setAfhankelijkheden(List<Vraag> afhankelijkheden) {
+    public void setAfhankelijkheden(Vraag[] afhankelijkheden) {
         this.afhankelijkheden = afhankelijkheden;
     }
 
