@@ -5,17 +5,6 @@
     <ruleSet>
         <rule resourceType="regular" sourceType="file">dakkapelDefinitieRules.drl</rule>
     </ruleSet>
-    <operation name="dakkapelService">
-        <input wrapperElementName="dakkapelRequest" targetNamespace="http://dakkapel.facts.re.rws.nl">
-            <fact type="nl.rws.re.facts.dakkapel.Step" targetNamespace="http://dakkapel.facts.re.rws.nl"></fact>
-            <fact type="nl.rws.re.facts.dakkapel.Grondslag" targetNamespace="http://dakkapel.facts.re.rws.nl"></fact>
-            <fact type="nl.rws.re.facts.dakkapel.Vraag" targetNamespace="http://dakkapel.facts.re.rws.nl"></fact>
-            <fact type="java.util.ArrayList"></fact>
-        </input>
-        <output wrapperElementName="dakkapelResponse" targetNamespace="http://dakkapel.facts.re.rws.nl">
-            <fact type="nl.rws.re.facts.dakkapel.GebruikerVragen" targetNamespace="http://dakkapel.facts.re.rws.nl"></fact>
-        </output>
-    </operation>
     <operation name="definitieRuleService">
         <input wrapperElementName="definitieRuleRequest" targetNamespace="http://dakkapelex.facts.re.rws.nl">
             <fact type="nl.rws.re.facts.dakkapelx.Grondslag" targetNamespace="http://dakkapelex.facts.re.rws.nl"></fact>

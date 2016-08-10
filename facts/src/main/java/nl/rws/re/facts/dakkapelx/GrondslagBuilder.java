@@ -1,9 +1,5 @@
 package nl.rws.re.facts.dakkapelx;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 /**
  * Created by Md. Mainul Hasan Patwary on 01-Aug-16.
  * email: mhasan_mitul@yahoo.com

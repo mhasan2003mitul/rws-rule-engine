@@ -1,0 +1,86 @@
+package nl.rws.re.rules.dakkapel;
+import nl.rws.re.facts.dakkapelx.Grondslag;
+import nl.rws.re.facts.dakkapelx.GrondslagBeschrijving;
+import nl.rws.re.facts.dakkapelx.GebruikerVragen;
+import nl.rws.re.facts.dakkapelx.Vraag;
+import nl.rws.re.facts.dakkapelx.Antwoord;
+import nl.rws.re.facts.dakkapelx.RuleResultaat;
+
+import nl.rws.re.facts.error.Error;
+import nl.rws.re.facts.error.ErrorMessage;
+
+import java.util.List;
+import java.util.Arrays
+import java.util.ArrayList;
+
+dialect  "mvel"
+
+rule "Is definitie heeft alles grondslags?"
+    when
+        $grondslagRondom: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.DAKPANNEN_RONDOM.toString())
+        $grondslagSchuinDak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_SCHUIN_DAK.toString())
+    then
+        drools.setFocus("dakpannen-rondom-vragen");
+end
+
+rule  "Als alles grondslag niet heeft"
+    when
+        (not Grondslag(grondslagBeschrijving == GrondslagBeschrijving.DAKPANNEN_RONDOM.toString()) or
+        not Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_SCHUIN_DAK.toString()))
+    then
+        insert(new Error(ErrorMessage.DEFINITIE_HEEFT_GEEN_GRONDSLAG.toString()));
+end
+
+rule "Is dakpannen rondom grondslag vragen hebben alles antwoord?" agenda-group "dakpannen-rondom-vragen" salience 10
+    when
+        $grondslagRondom: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.DAKPANNEN_RONDOM.toString(),$vragen: vragen)
+        $grondslagSchuinDak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_SCHUIN_DAK.toString())
+        $vragenHeeftGeenAntwoord:List(size > 0)from collect(Vraag(antwoord == null) from $vragen)
+    then
+        retract($grondslagRondom);
+        retract($grondslagSchuinDak);
+        insert(new GebruikerVragen($vragenHeeftGeenAntwoord));
+end
+
+rule "Is op een schuin dak grondslag vragen hebben alles antwoord?" agenda-group "dakpannen-rondom-vragen" salience 9
+    when
+        $grondslagSchuinDak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_SCHUIN_DAK.toString(),$vragen: vragen)
+        $grondslagRondom: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.DAKPANNEN_RONDOM.toString())
+        $vragenHeeftGeenAntwoord:List(size > 0)from collect(Vraag(antwoord == null) from $vragen)
+    then
+        retract($grondslagRondom);
+        retract($grondslagSchuinDak);
+        insert(new GebruikerVragen($vragenHeeftGeenAntwoord));
+end
+
+rule "Rule voor JA beslissing voor definitie" agenda-group "dakpannen-rondom-vragen" salience 8
+    when
+        $grondslagRondom: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.DAKPANNEN_RONDOM.toString(),$rondomVragen: vragen)
+        List(size == 0)from collect(Vraag(antwoord != Antwoord.JA.name()) from $rondomVragen)
+        $grondslagSchuinDak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_SCHUIN_DAK.toString(),$shuinDakVragen: vragen)
+        List(size == 0)from collect(Vraag(antwoord != Antwoord.JA.name()) from $shuinDakVragen)
+    then
+        insert(new RuleResultaat(Antwoord.JA.name()));
+end
+
+rule "Rule voor Nee beslissing voor definitie" agenda-group "dakpannen-rondom-vragen" salience 7
+    when
+        not(RuleResultaat())
+        ($grondslagRondom: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.DAKPANNEN_RONDOM.toString(),$rondomVragen: vragen) and
+        List(size >= 0)from collect(Vraag(antwoord != Antwoord.JA.name()) from $rondomVragen)) or
+        ($grondslagSchuinDak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_SCHUIN_DAK.toString(),$shuinDakVragen: vragen) and
+        List(size >= 0)from collect(Vraag(antwoord != Antwoord.JA.name()) from $shuinDakVragen))
+    then
+        insert(new RuleResultaat(Antwoord.NEE.name()));
+end
+
+rule "Rule voor verwijderen alles" agenda-group "dakpannen-rondom-vragen" salience -1
+    when
+        RuleResultaat();
+        $grondslagRondom: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.DAKPANNEN_RONDOM.toString())
+        $grondslagSchuinDak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_SCHUIN_DAK.toString())
+    then
+        retract($grondslagRondom);
+        retract($grondslagSchuinDak);
+end
+

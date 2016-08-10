@@ -6,7 +6,10 @@ package nl.rws.re.facts.error;
  * skype: mhasan_mitul
  */
 public enum ErrorMessage {
-    DEFINITIE_HEEFT_GEEN_GRONDSLAG("Definitie regels heeft geen grondslags informatie");
+    DEFINITIE_HEEFT_GEEN_GRONDSLAG("Definitie regels heeft geen grondslags informatie"),
+    NIET_ZICHTBAAR_ZIJDAKVLAK("Niet zichtbaar zijdakvlak heeft geen grondslags informatie"),
+    NIET_ZICHTBAAR_DAKVLAK("Niet zichtbaar dakvlak heeft geen grondslags informatie"),
+    ALGEMENE_MSG("Geen grondslag informatie toevoegen");
     private String message;
 
     private ErrorMessage(String message) {

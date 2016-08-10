@@ -3,10 +3,6 @@ package nl.rws.re.facts.dakkapelx;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
-
 /**
  * Created by Md. Mainul Hasan Patwary on 01-Aug-16.
  * email: mhasan_mitul@yahoo.com

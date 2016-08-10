@@ -1,0 +1,223 @@
+package nl.rws.re.rules.dakkapel;
+import nl.rws.re.facts.dakkapelx.Grondslag;
+import nl.rws.re.facts.dakkapelx.GrondslagBeschrijving;
+import nl.rws.re.facts.dakkapelx.GebruikerVragen;
+import nl.rws.re.facts.dakkapelx.Vraag;
+import nl.rws.re.facts.dakkapelx.Antwoord;
+import nl.rws.re.facts.dakkapelx.DakkapelKant;
+import nl.rws.re.facts.dakkapelx.RuleResultaat;
+import nl.rws.re.facts.dakkapelx.NietZichtbaarDakvlakRuleResultaat;
+import nl.rws.re.facts.dakkapelx.DakkapelInAchterdakvlakOfNietRuleResultaat;
+import nl.rws.re.facts.dakkapelx.ZichtbaarOfNietRuleResultaat;
+import nl.rws.re.facts.dakkapelx.VergunningvrijRuleResultaat;
+
+import nl.rws.re.facts.error.Error;
+import nl.rws.re.facts.error.ErrorMessage;
+
+import java.util.List;
+import java.util.Arrays
+import java.util.ArrayList;
+
+dialect  "mvel"
+
+rule "Is 'Niet zichtbaar zijdakvlak' heeft alles grondslag?"
+when
+    $grondslagZijdakvlak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_ZIJDAKVLAK.toString())
+    $grondslagOpenbaarToegankelijk: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.NAAR_OPENBAAR_TOEGELIJK_GEBIED_GEKEERD.toString())
+then
+    drools.setFocus("niet-zichtbaar-zijdakvlak-vragen");
+end
+
+rule  "Als 'Niet zichtbaar zijdakvlak' alles grondslag niet heeft"
+    when
+        not(RuleResultaat())
+        (not Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_ZIJDAKVLAK.toString()) or
+        not Grondslag(grondslagBeschrijving == GrondslagBeschrijving.NAAR_OPENBAAR_TOEGELIJK_GEBIED_GEKEERD.toString()))
+    then
+        insert(new Error(ErrorMessage.NIET_ZICHTBAAR_ZIJDAKVLAK.toString()));
+end
+
+rule "Is 'Op een zijdakvlak' grondslag vragen hebben alles antwoord?" agenda-group "niet-zichtbaar-zijdakvlak-vragen" salience 10
+    when
+        $grondslagOpEenZijdakvlak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_ZIJDAKVLAK.toString(),$vragen: vragen)
+        $grondslagOpenbaarToegankelijk: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.NAAR_OPENBAAR_TOEGELIJK_GEBIED_GEKEERD.toString())
+        $vragenHeeftGeenAntwoord:List(size > 0)from collect(Vraag(antwoord == null) from $vragen)
+    then
+        retract($grondslagOpEenZijdakvlak);
+        retract($grondslagOpenbaarToegankelijk);
+        insert(new GebruikerVragen($vragenHeeftGeenAntwoord));
+end
+
+rule "Is op een schuin dak grondslag vragen hebben alles antwoord?" agenda-group "niet-zichtbaar-zijdakvlak-vragen" salience 9
+    when
+        $grondslagOpenbaarToegankelijk: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.NAAR_OPENBAAR_TOEGELIJK_GEBIED_GEKEERD.toString(),$vragen: vragen)
+        $grondslagOpEenZijdakvlak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_ZIJDAKVLAK.toString())
+        $vragenHeeftGeenAntwoord:List(size > 0)from collect(Vraag(antwoord == null) from $vragen)
+    then
+        retract($grondslagOpenbaarToegankelijk);
+        retract($grondslagOpEenZijdakvlak);
+        insert(new GebruikerVragen($vragenHeeftGeenAntwoord));
+end
+
+rule "Rule voor JA beslissing voor 'Niet zichtbaar zijdakvlak'" agenda-group "niet-zichtbaar-zijdakvlak-vragen" salience 8
+    when
+        not(RuleResultaat())
+        $grondslagOpEenZijdakvlak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_ZIJDAKVLAK.toString(),$zijdakvlakVragen: vragen)
+        List(size == 0)from collect(Vraag(antwoord != DakkapelKant.ZIJKANT.name()) from $zijdakvlakVragen)
+        $grondslagOpenbaarToegankelijk: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.NAAR_OPENBAAR_TOEGELIJK_GEBIED_GEKEERD.toString(),$openbaarToegankelihkVragen: vragen)
+        List(size == 0)from collect(Vraag(antwoord != Antwoord.NEE.name()) from $openbaarToegankelihkVragen)
+    then
+        insert(new RuleResultaat(Antwoord.JA.name()));
+end
+
+rule "Rule voor Nee beslissing voor 'Niet zichtbaar zijdakvlak'" agenda-group "niet-zichtbaar-zijdakvlak-vragen" salience 7
+    when
+        not(RuleResultaat())
+        ($grondslagOpEenZijdakvlak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_ZIJDAKVLAK.toString(),$zijdakvlakVragen: vragen) and
+        List(size >= 0)from collect(Vraag(antwoord != DakkapelKant.ZIJKANT.name()) from $zijdakvlakVragen)) or
+        ($grondslagOpenbaarToegankelijk: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.NAAR_OPENBAAR_TOEGELIJK_GEBIED_GEKEERD.toString(),$openbaarToegankelihkVragen: vragen) and
+        List(size >= 0)from collect(Vraag(antwoord != Antwoord.NEE.name()) from $openbaarToegankelihkVragen))
+    then
+        insert(new RuleResultaat(Antwoord.NEE.name()));
+end
+
+rule "Rule voor alles verwijderen van 'Niet zichtbaar zijdakvlak'" agenda-group "niet-zichtbaar-zijdakvlak-vragen" salience -1
+    when
+        RuleResultaat();
+        $grondslagOpEenZijdakvlak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_ZIJDAKVLAK.toString())
+        $grondslagOpenbaarToegankelijk: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.NAAR_OPENBAAR_TOEGELIJK_GEBIED_GEKEERD.toString())
+    then
+        retract($grondslagOpEenZijdakvlak);
+        retract($grondslagOpenbaarToegankelijk);
+        drools.setFocus("niet-zichtbaar-dakvlak-rule");
+end
+
+/*
+*   'Op een achterdakvlak' grondslag validation
+*/
+
+
+rule "Is 'Niet zichtbaar dakval' heeft alles grondslag?" agenda-group "niet-zichtbaar-dakvlak-rule" salience 100
+when
+    $grondslagAchterdakvlak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_ACHTERDAKVLAK.toString(),$vragen:vragen)
+then
+    drools.setFocus("niet-zichtbaar-achterdakvlak-vragen-validation-en-beslissing");
+end
+
+rule  "Als 'Niet zichtbaar dakval' alles grondslag niet heeft" agenda-group "niet-zichtbaar-dakvlak-rule" salience 99
+    when
+        not(NietZichtbaarDakvlakRuleResultaat())
+        not (Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_ACHTERDAKVLAK.toString()))
+    then
+        insert(new Error(ErrorMessage.NIET_ZICHTBAAR_DAKVLAK.toString()));
+end
+
+/*
+*   'Op een achterdakvlak" grondslag vragen validation en beslissing maken
+*/
+
+rule "Is 'Op een achterdakvlak' grondslag vragen hebben alles antwoord?" agenda-group "niet-zichtbaar-achterdakvlak-vragen-validation-en-beslissing" salience 100
+    when
+        $grondslagOpEenAchterdakvlak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_ACHTERDAKVLAK.toString(),$vragen: vragen)
+        $vragenHeeftGeenAntwoord:List(size > 0)from collect(Vraag(antwoord == null) from $vragen)
+    then
+        insert(new GebruikerVragen($vragenHeeftGeenAntwoord));
+end
+
+rule "Rule voor JA beslissing voor 'Niet zichtbaar dakvlak'" agenda-group "niet-zichtbaar-achterdakvlak-vragen-validation-en-beslissing" salience 99
+    when
+        not(NietZichtbaarDakvlakRuleResultaat())
+        $nietZichtbaarZijdakvlakBeslissing: RuleResultaat() and
+        (RuleResultaat(resultaat == Antwoord.JA.name()) or
+        ($grondslagOpEenAchterdakvlak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_ACHTERDAKVLAK.toString(),$achterdakvlakVragen: vragen) and
+        List(size == 0)from collect(Vraag(antwoord != DakkapelKant.ACHTERKANT.name()) from $achterdakvlakVragen)))
+    then
+        retract($nietZichtbaarZijdakvlakBeslissing);
+        insert(new NietZichtbaarDakvlakRuleResultaat(Antwoord.JA.name()));
+end
+
+rule "Rule voor Nee beslissing voor 'Niet zichtbaar dakvlak'" agenda-group "niet-zichtbaar-achterdakvlak-vragen-validation-en-beslissing" salience 98
+    when
+        not(NietZichtbaarDakvlakRuleResultaat())
+        $nietZichtbaarZijdakvlakBeslissing: RuleResultaat() and
+        (RuleResultaat(resultaat == Antwoord.NEE.name()) and
+        ($grondslagOpEenAchterdakvlak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_ACHTERDAKVLAK.toString(),$achterdakvlakVragen: vragen) and
+        List(size >= 0)from collect(Vraag(antwoord != Antwoord.JA.name()) from $achterdakvlakVragen)))
+    then
+        retract($nietZichtbaarZijdakvlakBeslissing);
+        insert(new NietZichtbaarDakvlakRuleResultaat(Antwoord.NEE.name()));
+end
+
+rule "Rule voor alles verwijderen van 'Niet zichtbaar achterdakvlak'" agenda-group "niet-zichtbaar-achterdakvlak-vragen-validation-en-beslissing" salience -1
+    when
+        NietZichtbaarDakvlakRuleResultaat()
+        $grondslagOpEenAchterdakvlak: Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_ACHTERDAKVLAK.toString())
+    then
+        retract($grondslagOpEenAchterdakvlak);
+        drools.setFocus("dakkapel-in-achterdakvlak-of-niet-naar-openbaar-toegankelijk");
+end
+
+rule "Rule voor JA beslissing voor 'Dakkapel in achterdakvlak of niet'" agenda-group "dakkapel-in-achterdakvlak-of-niet-naar-openbaar-toegankelijk" salience 100
+    when
+        $nietZichtbaarDakdakvlakBeslissing: NietZichtbaarDakvlakRuleResultaat(resultaat == Antwoord.JA.name())
+    then
+        insert(new DakkapelInAchterdakvlakOfNietRuleResultaat(Antwoord.JA.name()));
+end
+
+rule "Rule voor Nee beslissing voor 'Dakkapel in achterdakvlak of niet'" agenda-group "dakkapel-in-achterdakvlak-of-niet-naar-openbaar-toegankelijk" salience 99
+    when
+        $nietZichtbaarDakdakvlakBeslissing: NietZichtbaarDakvlakRuleResultaat(resultaat == Antwoord.NEE.name())
+    then
+        insert(new DakkapelInAchterdakvlakOfNietRuleResultaat(Antwoord.NEE.name()));
+end
+
+rule "Rule voor alles verwijderen voor 'Dakkapel in achterdakvlak of niet'" agenda-group "dakkapel-in-achterdakvlak-of-niet-naar-openbaar-toegankelijk" salience -1
+    when
+        $nietZichtbaarDakdakvlakBeslissing: NietZichtbaarDakvlakRuleResultaat()
+    then
+        retract($nietZichtbaarDakdakvlakBeslissing);
+        drools.setFocus("zichtbaar-of-niet");
+end
+
+rule "Rule voor JA beslissing voor 'Zichtbaar of niet'" agenda-group "zichtbaar-of-niet" salience 100
+    when
+        $beslissing: DakkapelInAchterdakvlakOfNietRuleResultaat(resultaat == Antwoord.JA.name())
+    then
+        insert(new ZichtbaarOfNietRuleResultaat(Antwoord.JA.name()));
+end
+
+rule "Rule voor Nee beslissing voor 'Zichtbaar of niet'" agenda-group "zichtbaar-of-niet" salience 99
+    when
+        $beslissing: DakkapelInAchterdakvlakOfNietRuleResultaat(resultaat == Antwoord.NEE.name())
+    then
+        insert(new ZichtbaarOfNietRuleResultaat(Antwoord.NEE.name()));
+end
+
+rule "Rule voor alles verwijderen voor 'Zichtbaar of niet'" agenda-group "zichtbaar-of-niet" salience -1
+    when
+        $beslissing: DakkapelInAchterdakvlakOfNietRuleResultaat()
+    then
+        retract($beslissing);
+        drools.setFocus("vergunningvrij");
+end
+
+rule "Rule voor JA beslissing voor 'Vergunningvrij'" agenda-group "vergunningvrij" salience 100
+    when
+        $beslissing: ZichtbaarOfNietRuleResultaat(resultaat == Antwoord.JA.name())
+    then
+        insert(new VergunningvrijRuleResultaat(Antwoord.JA.name()));
+end
+
+rule "Rule voor Nee beslissing voor 'Vergunningvrij'" agenda-group "vergunningvrij" salience 99
+    when
+        $beslissing: ZichtbaarOfNietRuleResultaat(resultaat == Antwoord.NEE.name())
+    then
+        insert(new VergunningvrijRuleResultaat(Antwoord.NEE.name()));
+end
+
+rule "Rule voor alles verwijderen voor 'Vergunningvrij'" agenda-group "vergunningvrij" salience -1
+    when
+        $beslissing: ZichtbaarOfNietRuleResultaat()
+    then
+        retract($beslissing);
+end

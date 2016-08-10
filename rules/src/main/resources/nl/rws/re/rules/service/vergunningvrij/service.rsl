@@ -3,7 +3,7 @@
         xmlns="http://wso2.org/carbon/rules"
         targetNamespace="http://dakkapel.facts.re.rws.nl">
     <ruleSet>
-        <rule resourceType="regular" sourceType="file">dakkapelDefinitieRules.drl</rule>
+        <rule resourceType="regular" sourceType="file">dakkapelRules.drl</rule>
     </ruleSet>
     <operation name="dakkapelService">
         <input wrapperElementName="dakkapelRequest" targetNamespace="http://dakkapel.facts.re.rws.nl">
@@ -16,12 +16,12 @@
             <fact type="nl.rws.re.facts.dakkapel.GebruikerVragen" targetNamespace="http://dakkapel.facts.re.rws.nl"></fact>
         </output>
     </operation>
-    <operation name="definitieRuleService">
-        <input wrapperElementName="definitieRuleRequest" targetNamespace="http://dakkapelex.facts.re.rws.nl">
+    <operation name="dakkapelExService">
+        <input wrapperElementName="dakkapelExRequest" targetNamespace="http://dakkapelex.facts.re.rws.nl">
             <fact type="nl.rws.re.facts.dakkapelx.Grondslag" targetNamespace="http://dakkapelex.facts.re.rws.nl"></fact>
             <fact type="nl.rws.re.facts.dakkapelx.Vraag" targetNamespace="http://dakkapelex.facts.re.rws.nl"></fact>
         </input>
-        <output wrapperElementName="definitieRuleResponse" targetNamespace="http://dakkapel.facts.re.rws.nl">
+        <output wrapperElementName="dakkapelExResponse" targetNamespace="http://dakkapel.facts.re.rws.nl">
             <fact type="nl.rws.re.facts.dakkapelx.GebruikerVragen" targetNamespace="http://dakkapelex.facts.re.rws.nl"></fact>
             <fact type="nl.rws.re.facts.dakkapelx.RuleResultaat" targetNamespace="http://dakkapelex.facts.re.rws.nl"></fact>
             <fact type="nl.rws.re.facts.error.Error" targetNamespace="http://dakkapelex.facts.re.rws.nl"></fact>

@@ -15,8 +15,13 @@
         </ksession>
     </kbase>
 
-    <kbase name="kBaseDakkapelEx" packages="nl.rws.re.rules.dakkapelex">
-        <ksession name="dakkapelExSession" type="stateful">
+    <kbase name="kBaseDakkapelDefinitieEx" packages="nl.rws.re.rules.dakkapelex.definitie">
+        <ksession name="dakkapelExDefinitieSession" type="stateful">
+        </ksession>
+    </kbase>
+
+    <kbase name="kBaseDakkapelVergunningvrijEx" packages="nl.rws.re.rules.dakkapelex.voorwaardenvergunningvrij">
+        <ksession name="dakkapelExVergunningvrijSession" type="stateful">
         </ksession>
     </kbase>
 

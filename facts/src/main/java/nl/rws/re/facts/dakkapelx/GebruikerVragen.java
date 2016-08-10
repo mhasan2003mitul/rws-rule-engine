@@ -3,7 +3,6 @@ package nl.rws.re.facts.dakkapelx;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

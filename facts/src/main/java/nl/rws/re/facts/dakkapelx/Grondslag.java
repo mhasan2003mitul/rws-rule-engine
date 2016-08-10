@@ -3,17 +3,11 @@ package nl.rws.re.facts.dakkapelx;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-import javax.xml.bind.annotation.*;
-import java.lang.reflect.Array;
-import java.util.*;
-
 /**
  * Created by Md. Mainul Hasan Patwary on 01-Aug-16.
  * email: mhasan_mitul@yahoo.com
  * skype: mhasan_mitul
  */
-@XmlRootElement(namespace = "http://dakkapel.facts.re.rws.nl")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Grondslag {
     private String grondslagBeschrijving;
     private String grondslagType;

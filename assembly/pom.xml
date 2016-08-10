@@ -16,7 +16,7 @@
                 <version>1.6.3</version>
                 <configuration>
                     <includeDependencies>false</includeDependencies>
-                    <aarName>DakkapelService</aarName>
+                    <aarName>DefinitieService</aarName>
                     <fileSets>
                         <fileSet>
                             <directory>../facts/target</directory>
@@ -48,7 +48,21 @@
                             </includes>
                         </fileset>
                         <fileset>
-                            <directory>../rules/src/main/resources/nl/rws/re/rules/service</directory>
+                            <directory>../rules/src/main/resources/nl/rws/re/rules/dakkapelex/definitie</directory>
+                            <outputDirectory>conf</outputDirectory>
+                            <includes>
+                                <include>*.drl</include>
+                            </includes>
+                        </fileset>
+                        <fileset>
+                            <directory>../rules/src/main/resources/nl/rws/re/rules/dakkapelex/voorwaardenvergunningvrij</directory>
+                            <outputDirectory>conf</outputDirectory>
+                            <includes>
+                                <include>*.drl</include>
+                            </includes>
+                        </fileset>
+                        <fileset>
+                            <directory>../rules/src/main/resources/nl/rws/re/rules/service/definitie</directory>
                             <outputDirectory>META-INF/</outputDirectory>             
                             <includes>
                                 <include>
