@@ -23,11 +23,24 @@ rule "Is definitie heeft alles grondslags?"
         drools.setFocus("dakpannen-rondom-vragen");
 end
 
+rule  "Als definitie geen grondslag heeft"
+    when
+        not(RuleResultaat())
+        not(Error())
+        not(Grondslag())
+        not(GebruikerVragen())
+    then
+        insert(new Error(ErrorMessage.DEFINITIE_HEEFT_GEEN_GRONDSLAG.toString()));
+end
+
 rule  "Als alles grondslag niet heeft"
     when
+        not(Error())
+        $grondSlag:Grondslag()
         (not Grondslag(grondslagBeschrijving == GrondslagBeschrijving.DAKPANNEN_RONDOM.toString()) or
         not Grondslag(grondslagBeschrijving == GrondslagBeschrijving.OP_EEN_SCHUIN_DAK.toString()))
     then
+        retract($grondSlag);
         insert(new Error(ErrorMessage.DEFINITIE_HEEFT_GEEN_GRONDSLAG.toString()));
 end
 

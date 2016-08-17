@@ -1,8 +1,8 @@
 package nl.rws.re.rules.test.dakkapel;
 
 import nl.rws.re.facts.dakkapelx.*;
-import nl.rws.re.facts.error.Error;
-import nl.rws.re.facts.error.ErrorMessage;
+import nl.rws.re.facts.dakkapelx.Error;
+import nl.rws.re.facts.dakkapelx.ErrorMessage;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Assert;
@@ -12,6 +12,8 @@ import org.kie.api.KieServices;
 import org.kie.api.event.rule.DebugAgendaEventListener;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+
+import java.util.Collection;
 
 /**
  * Created by Md. Mainul Hasan Patwary on 09-Aug-16.
@@ -81,6 +83,8 @@ public class DakkapelExTest {
         kieSession.insert(grondslag1);
 
         kieSession.fireAllRules();
+
+        printAllObjects(kieSession.getObjects());
 
         Error error = null;
         for (Object object : kieSession.getObjects()) {
@@ -310,16 +314,7 @@ public class DakkapelExTest {
 
         kieSession.fireAllRules();
 
-        for(Object obj: kieSession.getObjects()){
-            System.out.println(obj.toString());
-            if(obj instanceof  Error){
-                System.out.println(((Error)obj).getMessage());
-            }else if(obj instanceof  RuleResultaat){
-                System.out.println(((RuleResultaat)obj).getResultaat());
-            }else if(obj instanceof  Grondslag){
-                System.out.println(((Grondslag)obj).getGrondslagBeschrijving());
-            }
-        }
+        printAllObjects(kieSession.getObjects());
 
         Assert.assertThat(kieSession.getObjects().toArray()[0],Matchers.instanceOf(NietZichtbaarDakvlakRuleResultaat.class));
         Assert.assertThat(Antwoord.JA.name(), Matchers.equalTo(((NietZichtbaarDakvlakRuleResultaat) kieSession.getObjects().toArray()[0]).getResultaat()));
@@ -339,19 +334,23 @@ public class DakkapelExTest {
 
         kieSession.fireAllRules();
 
-        for(Object obj: kieSession.getObjects()){
-            System.out.println(obj.toString());
-            if(obj instanceof  Error){
-                System.out.println(((Error)obj).getMessage());
-            }else if(obj instanceof  RuleResultaat){
-                System.out.println(((RuleResultaat)obj).getResultaat());
-            }else if(obj instanceof  Grondslag){
-                System.out.println(((Grondslag)obj).getGrondslagBeschrijving());
-            }
-        }
+        printAllObjects(kieSession.getObjects());
 
         Assert.assertThat(kieSession.getObjects().toArray()[0],Matchers.instanceOf(NietZichtbaarDakvlakRuleResultaat.class));
         Assert.assertThat(Antwoord.NEE.name(), Matchers.equalTo(((NietZichtbaarDakvlakRuleResultaat) kieSession.getObjects().toArray()[0]).getResultaat()));
+    }
+
+    private void printAllObjects(Collection<? extends  Object> objects) {
+        for(Object obj:objects){
+            System.out.println(obj.toString());
+            if(obj instanceof Error){
+                System.out.println(((Error)obj).getMessage());
+            }else if(obj instanceof RuleResultaat){
+                System.out.println(((RuleResultaat)obj).getResultaat());
+            }else if(obj instanceof Grondslag){
+                System.out.println(((Grondslag)obj).getGrondslagBeschrijving());
+            }
+        }
     }
 
     @After

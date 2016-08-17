@@ -10,12 +10,14 @@ import javax.ws.rs.Path;
  * Created by Administrator on 07-Jul-16.
  */
 @Path("")
-public class DakkapelService {
+public class DefinitieService {
 
-    private static Logger LOGGER = Logger.getLogger(DakkapelService.class);
+    private static Logger LOGGER = Logger.getLogger(DefinitieService.class);
 
     @GET
     public String result() {
+        
+
         return "Hello ";
     }
 }
