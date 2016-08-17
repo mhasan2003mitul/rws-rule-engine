@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>nl.rws.re</groupId>
-            <artifactId>re-rules</artifactId>
+            <artifactId>rules</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
