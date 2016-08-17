@@ -6,10 +6,10 @@ package nl.rws.re.facts.dakkapelx;
  * skype: mhasan_mitul
  */
 public class NietZichtbaarDakvlakRuleResultaat extends RuleResultaat {
-    public NietZichtbaarDakvlakRuleResultaat() {
-    }
-
-    public NietZichtbaarDakvlakRuleResultaat(String resultaat) {
-        super(resultaat);
-    }
+//    public NietZichtbaarDakvlakRuleResultaat() {
+//    }
+//
+//  //  public NietZichtbaarDakvlakRuleResultaat(String resultaat) {
+//        super(resultaat);
+//    }
 }

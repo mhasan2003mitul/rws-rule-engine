@@ -10,6 +10,6 @@ public class ZichtbaarOfNietRuleResultaat extends RuleResultaat {
     }
 
     public ZichtbaarOfNietRuleResultaat(String resultaat) {
-        super(resultaat);
+        //super(resultaat);
     }
 }

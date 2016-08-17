@@ -1,19 +1,12 @@
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ax2686="http://dakkapel.facts.re.rws.nl" xmlns:ax2687="http://dakkapelx.facts.re.rws.nl" xmlns:ax2688="http://error.facts.re.rws.nl" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://dakkapel.facts.re.rws.nl">
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ax2759="http://dakkapelx.facts.re.rws.nl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://dakkapelx.facts.re.rws.nl">
     <wsdl:types>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://error.facts.re.rws.nl">
-            <xs:complexType name="Error">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="message" nillable="true" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-        </xs:schema>
         <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://dakkapelx.facts.re.rws.nl">
             <xs:complexType name="Grondslag">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="definitieveBeslissing" nillable="true" type="xs:string"/>
                     <xs:element minOccurs="0" name="grondslagBeschrijving" nillable="true" type="xs:string"/>
                     <xs:element minOccurs="0" name="grondslagType" nillable="true" type="xs:string"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="vragen" nillable="true" type="ax2687:Vraag"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="vragen" nillable="true" type="ax2759:Vraag"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="Vraag">
@@ -22,50 +15,43 @@
                     <xs:element minOccurs="0" name="vraagId" nillable="true" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
-            <xs:complexType name="GebruikerVragen">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="gebruikerVragen" nillable="true" type="ax2687:Vraag"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="RuleResultaat">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="resultaat" nillable="true" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-        </xs:schema>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://dakkapel.facts.re.rws.nl">
             <xs:element name="definitieRuleRequest">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="grondslag" type="ax2687:Grondslag"/>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="vraag" type="ax2687:Vraag"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="grondslag" type="ax2759:Grondslag"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="vraag" type="ax2759:Vraag"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
+            <xs:complexType name="RuleResultaat">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="resultaat" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="resultaatVoor" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
             <xs:element name="definitieRuleResponse">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="gebruikerVragen" type="ax2687:GebruikerVragen"/>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="ruleResultaat" type="ax2687:RuleResultaat"/>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="error" type="ax2688:Error"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="vraag" type="ax2759:Vraag"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="ruleResultaat" type="ax2759:RuleResultaat"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
         </xs:schema>
     </wsdl:types>
     <wsdl:message name="definitieRuleServiceRequestMessage">
-        <wsdl:part name="parameters" element="ax2686:definitieRuleRequest"/>
+        <wsdl:part name="parameters" element="ax2759:definitieRuleRequest"/>
     </wsdl:message>
     <wsdl:message name="definitieRuleServiceResponseMessage">
-        <wsdl:part name="parameters" element="ax2686:definitieRuleResponse"/>
+        <wsdl:part name="parameters" element="ax2759:definitieRuleResponse"/>
     </wsdl:message>
-    <wsdl:portType name="DakkapelServicePortType">
+    <wsdl:portType name="DefinitieServicePortType">
         <wsdl:operation name="definitieRuleService">
-            <wsdl:input message="ax2686:definitieRuleServiceRequestMessage" wsaw:Action="urn:definitieRuleService"/>
-            <wsdl:output message="ax2686:definitieRuleServiceResponseMessage" wsaw:Action="urn:definitieRuleServiceResponse"/>
+            <wsdl:input message="ax2759:definitieRuleServiceRequestMessage" wsaw:Action="urn:definitieRuleService"/>
+            <wsdl:output message="ax2759:definitieRuleServiceResponseMessage" wsaw:Action="urn:definitieRuleServiceResponse"/>
         </wsdl:operation>
     </wsdl:portType>
-    <wsdl:binding name="DakkapelServiceSoap11Binding" type="ax2686:DakkapelServicePortType">
+    <wsdl:binding name="DefinitieServiceSoap11Binding" type="ax2759:DefinitieServicePortType">
         <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
         <wsdl:operation name="definitieRuleService">
             <soap:operation soapAction="urn:definitieRuleService" style="document"/>
@@ -77,7 +63,7 @@
             </wsdl:output>
         </wsdl:operation>
     </wsdl:binding>
-    <wsdl:binding name="DakkapelServiceSoap12Binding" type="ax2686:DakkapelServicePortType">
+    <wsdl:binding name="DefinitieServiceSoap12Binding" type="ax2759:DefinitieServicePortType">
         <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
         <wsdl:operation name="definitieRuleService">
             <soap12:operation soapAction="urn:definitieRuleService" style="document"/>
@@ -89,7 +75,7 @@
             </wsdl:output>
         </wsdl:operation>
     </wsdl:binding>
-    <wsdl:binding name="DakkapelServiceHttpBinding" type="ax2686:DakkapelServicePortType">
+    <wsdl:binding name="DefinitieServiceHttpBinding" type="ax2759:DefinitieServicePortType">
         <http:binding verb="POST"/>
         <wsdl:operation name="definitieRuleService">
             <http:operation location="definitieRuleService"/>
@@ -101,24 +87,24 @@
             </wsdl:output>
         </wsdl:operation>
     </wsdl:binding>
-    <wsdl:service name="DakkapelService">
-        <wsdl:port name="DakkapelServiceHttpsSoap11Endpoint" binding="ax2686:DakkapelServiceSoap11Binding">
-            <soap:address location="https://172.31.145.87:9458/services/DakkapelService.DakkapelServiceHttpsSoap11Endpoint/"/>
+    <wsdl:service name="DefinitieService">
+        <wsdl:port name="DefinitieServiceHttpSoap11Endpoint" binding="ax2759:DefinitieServiceSoap11Binding">
+            <soap:address location="http://172.31.145.87:9778/services/DefinitieService.DefinitieServiceHttpSoap11Endpoint/"/>
         </wsdl:port>
-        <wsdl:port name="DakkapelServiceHttpSoap11Endpoint" binding="ax2686:DakkapelServiceSoap11Binding">
-            <soap:address location="http://172.31.145.87:9778/services/DakkapelService.DakkapelServiceHttpSoap11Endpoint/"/>
+        <wsdl:port name="DefinitieServiceHttpsSoap11Endpoint" binding="ax2759:DefinitieServiceSoap11Binding">
+            <soap:address location="https://172.31.145.87:9458/services/DefinitieService.DefinitieServiceHttpsSoap11Endpoint/"/>
         </wsdl:port>
-        <wsdl:port name="DakkapelServiceHttpsSoap12Endpoint" binding="ax2686:DakkapelServiceSoap12Binding">
-            <soap12:address location="https://172.31.145.87:9458/services/DakkapelService.DakkapelServiceHttpsSoap12Endpoint/"/>
+        <wsdl:port name="DefinitieServiceHttpsSoap12Endpoint" binding="ax2759:DefinitieServiceSoap12Binding">
+            <soap12:address location="https://172.31.145.87:9458/services/DefinitieService.DefinitieServiceHttpsSoap12Endpoint/"/>
         </wsdl:port>
-        <wsdl:port name="DakkapelServiceHttpSoap12Endpoint" binding="ax2686:DakkapelServiceSoap12Binding">
-            <soap12:address location="http://172.31.145.87:9778/services/DakkapelService.DakkapelServiceHttpSoap12Endpoint/"/>
+        <wsdl:port name="DefinitieServiceHttpSoap12Endpoint" binding="ax2759:DefinitieServiceSoap12Binding">
+            <soap12:address location="http://172.31.145.87:9778/services/DefinitieService.DefinitieServiceHttpSoap12Endpoint/"/>
         </wsdl:port>
-        <wsdl:port name="DakkapelServiceHttpEndpoint" binding="ax2686:DakkapelServiceHttpBinding">
-            <http:address location="http://172.31.145.87:9778/services/DakkapelService.DakkapelServiceHttpEndpoint/"/>
+        <wsdl:port name="DefinitieServiceHttpsEndpoint" binding="ax2759:DefinitieServiceHttpBinding">
+            <http:address location="https://172.31.145.87:9458/services/DefinitieService.DefinitieServiceHttpsEndpoint/"/>
         </wsdl:port>
-        <wsdl:port name="DakkapelServiceHttpsEndpoint" binding="ax2686:DakkapelServiceHttpBinding">
-            <http:address location="https://172.31.145.87:9458/services/DakkapelService.DakkapelServiceHttpsEndpoint/"/>
+        <wsdl:port name="DefinitieServiceHttpEndpoint" binding="ax2759:DefinitieServiceHttpBinding">
+            <http:address location="http://172.31.145.87:9778/services/DefinitieService.DefinitieServiceHttpEndpoint/"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

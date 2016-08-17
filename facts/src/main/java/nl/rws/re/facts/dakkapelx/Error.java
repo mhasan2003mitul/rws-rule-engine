@@ -1,4 +1,6 @@
-package nl.rws.re.facts.error;
+package nl.rws.re.facts.dakkapelx;
+
+import java.io.Serializable;
 
 /**
  * Created by Md. Mainul Hasan Patwary on 09-Aug-16.

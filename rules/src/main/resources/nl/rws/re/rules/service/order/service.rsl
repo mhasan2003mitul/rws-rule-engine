@@ -1,0 +1,17 @@
+<ruleService
+        name="OrderService"
+        xmlns="http://wso2.org/carbon/rules"
+        targetNamespace="http://dakkapel.facts.re.rws.nl">
+    <ruleSet>
+        <rule resourceType="dtable" sourceType="file">orderApprovalRules.xlsx</rule>
+    </ruleSet>
+    <operation name="orderService">
+        <input wrapperElementName="placeOrderRequest">
+            <fact type="nl.rws.re.facts.order.PlaceOrder"></fact>
+        </input>
+        <output wrapperElementName="placeOrderResponse">
+            <fact type="nl.rws.re.facts.order.OrderAccept"></fact>
+            <fact type="nl.rws.re.facts.order.OrderReject"></fact>
+        </output>
+    </operation>
+</ruleService>

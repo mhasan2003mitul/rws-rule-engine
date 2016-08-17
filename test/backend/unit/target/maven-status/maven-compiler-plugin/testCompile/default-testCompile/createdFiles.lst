@@ -1,4 +1,7 @@
-nl\rws\re\rules\test\dakkapel\DakkapelExTest.class
+nl\rws\re\rules\test\dakkapel\DefinitieTestV2.class
+nl\rws\re\rules\test\dakkapel\DefinitieTest.class
+nl\rws\re\rules\test\dakkapel\VergunningvrijTest.class
+nl\rws\re\rules\test\housebuilding\HouseBuildingTest.class
+nl\rws\re\rules\test\dakkapel\BaseTest.class
 nl\rws\re\rules\test\PlaceOrderTest.class
 nl\rws\re\rules\test\dakkapel\DakkapelTest.class
-nl\rws\re\rules\test\housebuilding\HouseBuildingTest.class

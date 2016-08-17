@@ -10,6 +10,6 @@ public class DakkapelInAchterdakvlakOfNietRuleResultaat extends RuleResultaat {
     }
 
     public DakkapelInAchterdakvlakOfNietRuleResultaat(String resultaat) {
-        super(resultaat);
+        //super(resultaat);
     }
 }

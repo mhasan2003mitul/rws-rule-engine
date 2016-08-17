@@ -24,7 +24,7 @@
         <output wrapperElementName="definitieRuleResponse" targetNamespace="http://dakkapel.facts.re.rws.nl">
             <fact type="nl.rws.re.facts.dakkapelx.GebruikerVragen" targetNamespace="http://dakkapelex.facts.re.rws.nl"></fact>
             <fact type="nl.rws.re.facts.dakkapelx.RuleResultaat" targetNamespace="http://dakkapelex.facts.re.rws.nl"></fact>
-            <fact type="nl.rws.re.facts.error.Error" targetNamespace="http://dakkapelex.facts.re.rws.nl"></fact>
+            <fact type="nl.rws.re.facts.dakkapelx.Error" targetNamespace="http://dakkapelex.facts.re.rws.nl"></fact>
         </output>
     </operation>
 </ruleService>

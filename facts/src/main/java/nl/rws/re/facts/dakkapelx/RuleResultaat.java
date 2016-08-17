@@ -9,12 +9,14 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  * skype: mhasan_mitul
  */
 public class RuleResultaat {
+    private String resultaatVoor;
     private String resultaat;
 
     public RuleResultaat() {
     }
 
-    public RuleResultaat(String resultaat) {
+    public RuleResultaat(String resultaatVoor, String resultaat) {
+        this.resultaatVoor = resultaatVoor;
         this.resultaat = resultaat;
     }
 
@@ -26,6 +28,14 @@ public class RuleResultaat {
         this.resultaat = resultaat;
     }
 
+    public String getResultaatVoor() {
+        return resultaatVoor;
+    }
+
+    public void setResultaatVoor(String resultaatVoor) {
+        this.resultaatVoor = resultaatVoor;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,6 +45,7 @@ public class RuleResultaat {
         RuleResultaat that = (RuleResultaat) o;
 
         return new EqualsBuilder()
+                .append(getResultaatVoor(), that.getResultaatVoor())
                 .append(getResultaat(), that.getResultaat())
                 .isEquals();
     }
@@ -42,7 +53,15 @@ public class RuleResultaat {
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
+                .append(getResultaatVoor())
                 .append(getResultaat())
                 .toHashCode();
     }
+
+    public enum ResultaatVoor{
+        DEFINITIE,NIET_ZICHTBAAR_ZIJDAKVLAK,
+        NIET_ZICHTBAAR_DAKVLAK,DAKKAPEL_IN_ACHTERDAKVLAK,
+        ZICHTBAAR_OF_NIET,VOORWAARDEN_VERGUNNINGVRIJ
+    }
+
 }

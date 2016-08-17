@@ -6,10 +6,10 @@ package nl.rws.re.facts.dakkapelx;
  * skype: mhasan_mitul
  */
 public class VergunningvrijRuleResultaat extends RuleResultaat {
-    public VergunningvrijRuleResultaat() {
-    }
-
-    public VergunningvrijRuleResultaat(String resultaat) {
-        super(resultaat);
-    }
+//    public VergunningvrijRuleResultaat() {
+//    }
+//
+//    public VergunningvrijRuleResultaat(String resultaat) {
+//        super(resultaat);
+//    }
 }
