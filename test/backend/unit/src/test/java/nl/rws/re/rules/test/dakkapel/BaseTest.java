@@ -1,9 +1,7 @@
 package nl.rws.re.rules.test.dakkapel;
 
+import nl.rws.re.facts.dakkapelx.*;
 import nl.rws.re.facts.dakkapelx.Error;
-import nl.rws.re.facts.dakkapelx.Grondslag;
-import nl.rws.re.facts.dakkapelx.RuleResultaat;
-import nl.rws.re.facts.dakkapelx.Vraag;
 import org.junit.After;
 import org.kie.api.KieServices;
 import org.kie.api.event.rule.DebugAgendaEventListener;
@@ -38,10 +36,8 @@ public class BaseTest {
             System.out.println(obj.toString());
             if (obj instanceof Error) {
                 System.out.println(((Error) obj).getMessage());
-            } else if (obj instanceof RuleResultaat) {
-                System.out.println(((RuleResultaat) obj).getResultaat());
-            } else if (obj instanceof Grondslag) {
-                System.out.println(((Grondslag) obj).getGrondslagBeschrijving());
+            } else if (obj instanceof Node) {
+                System.out.println(((Node) obj).getId()+" : "+((Node) obj).getAntwoord());
             } else if (obj instanceof Vraag) {
                 System.out.println(((Vraag) obj).getVraagId());
             }

@@ -7,7 +7,7 @@ dialect  "mvel"
 
 rule "vraag voor node 2"
     when
-        not(Node(id == 2,antwoord==null))
+        not(Node(id == 2))
     then
         Vraag vraag = new Vraag();
         vraag.setVraagId("1");
@@ -16,7 +16,7 @@ end
 
 rule "vraag voor node 3"
     when
-        not(Node(id == 3,antwoord==null))
+        not(Node(id == 3))
     then
         Vraag vraag = new Vraag();
         vraag.setVraagId("2");
@@ -28,19 +28,19 @@ rule "Node 1 antwoord JA"
         Node(id == 2,antwoord==Antwoord.JA.name())
         Node(id == 3,antwoord==Antwoord.JA.name())
     then
-        insert(Antwoord.JA.name());
+        insert(new Node(1,Antwoord.JA.name()));
 end
 
 rule "Node 1 antwoord NEE voor node 2"
     when
         Node(id == 2,antwoord==Antwoord.NEE.name())
     then
-        insert(Antwoord.NEE.name());
+        insert(new Node(1,Antwoord.NEE.name()));
 end
 
 rule "Node 1 antwoord NEE voor node 3"
     when
         Node(id == 3,antwoord==Antwoord.NEE.name())
     then
-        insert(Antwoord.NEE.name());
+        insert(new Node(1,Antwoord.NEE.name()));
 end

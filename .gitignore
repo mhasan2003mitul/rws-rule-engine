@@ -5,3 +5,6 @@
 /frontend/target
 /rules/target
 /test/backend/unit/target
+/assembly/DefinitieService/target
+/assembly/OrderService/target
+/assembly/VergunningvrijService/target

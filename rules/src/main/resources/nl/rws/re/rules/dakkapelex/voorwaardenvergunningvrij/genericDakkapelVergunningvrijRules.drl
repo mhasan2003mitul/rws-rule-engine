@@ -1,0 +1,121 @@
+package nl.rws.re.rules.dakkapel;
+import nl.rws.re.facts.dakkapelx.Node;
+import nl.rws.re.facts.dakkapelx.Vraag;
+import nl.rws.re.facts.dakkapelx.Antwoord;
+
+dialect  "mvel"
+
+rule "vraag voor node 5"
+    when
+        not(Node(id == 5))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("3");
+        insert(vraag);
+end
+
+rule "vraag voor node 7"
+    when
+        not(Node(id == 7))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("3");
+        insert(vraag);
+end
+
+rule "vraag voor node 8"
+    when
+        not(Node(id == 8))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("4");
+        insert(vraag);
+end
+
+rule "Node 6 antwoord JA"
+    when
+        Node(id == 7,antwoord==Antwoord.JA.name())
+        Node(id == 8,antwoord==Antwoord.NEE.name())
+    then
+        insert(new Node(6,Antwoord.JA.name()));
+end
+
+rule "Node 6 antwoord NEE voor node 7"
+    when
+        Node(id == 7,antwoord==Antwoord.NEE.name())
+    then
+        insert(new Node(6,Antwoord.NEE.name()));
+end
+
+rule "Node 6 antwoord NEE voor node 8"
+    when
+        Node(id == 8,antwoord==Antwoord.JA.name())
+    then
+        insert(new Node(6,Antwoord.NEE.name()));
+end
+
+rule "Node 4 antwoord JA voor node 5"
+    when
+        not(Node(id == 4))
+        Node(id == 5,antwoord==Antwoord.JA.name())
+    then
+        insert(new Node(4,Antwoord.JA.name()));
+end
+
+rule "Node 4 antwoord JA voor node 6"
+    when
+        not(Node(id == 4))
+        Node(id == 6,antwoord==Antwoord.JA.name())
+    then
+        insert(new Node(4,Antwoord.JA.name()));
+end
+
+rule "Node 4 antwoord NEE"
+    when
+        Node(id == 5,antwoord==Antwoord.NEE.name())
+        Node(id == 6,antwoord==Antwoord.NEE.name())
+    then
+        insert(new Node(4,Antwoord.NEE.name()));
+end
+
+rule "Node 3 antwoord JA"
+    when
+        Node(id == 4,antwoord==Antwoord.JA.name())
+    then
+        insert(new Node(3,Antwoord.JA.name()));
+end
+
+rule "Node 3 antwoord NEE voor node 4"
+    when
+        Node(id == 4,antwoord==Antwoord.NEE.name())
+    then
+        insert(new Node(3,Antwoord.NEE.name()));
+end
+
+rule "Node 2 antwoord JA"
+    when
+        Node(id == 3,antwoord==Antwoord.JA.name())
+    then
+        insert(new Node(2,Antwoord.JA.name()));
+end
+
+rule "Node 2 antwoord NEE voor node 3"
+    when
+        Node(id == 3,antwoord==Antwoord.NEE.name())
+    then
+        insert(new Node(2,Antwoord.NEE.name()));
+end
+
+rule "Node 1 antwoord JA"
+    when
+        Node(id == 2,antwoord==Antwoord.JA.name())
+    then
+        insert(new Node(1,Antwoord.JA.name()));
+end
+
+rule "Node 1 antwoord NEE voor node 2"
+    when
+        Node(id == 2,antwoord==Antwoord.NEE.name())
+    then
+        insert(new Node(1,Antwoord.NEE.name()));
+end

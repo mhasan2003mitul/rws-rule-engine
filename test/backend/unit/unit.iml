@@ -11,19 +11,19 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="re-rules" />
-    <orderEntry type="library" name="Maven: org.drools:drools-compiler:6.4.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.drools:drools-core:6.4.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.mvel:mvel2:2.2.8.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.drools:drools-compiler:6.3.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.drools:drools-core:6.3.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.mvel:mvel2:2.2.6.Final" level="project" />
     <orderEntry type="library" name="Maven: org.kie:kie-api:6.4.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.kie:kie-internal:6.4.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.kie:kie-internal:6.3.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.21" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.4" level="project" />
     <orderEntry type="library" name="Maven: org.antlr:antlr-runtime:3.5" level="project" />
-    <orderEntry type="library" name="Maven: org.eclipse.jdt.core.compiler:ecj:4.4.2" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jdt.core.compiler:ecj:4.3.1" level="project" />
     <orderEntry type="library" name="Maven: com.thoughtworks.xstream:xstream:1.4.7" level="project" />
     <orderEntry type="library" name="Maven: xmlpull:xmlpull:1.1.3.1" level="project" />
     <orderEntry type="library" name="Maven: xpp3:xpp3_min:1.1.4c" level="project" />
-    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:2.6.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:2.5.0" level="project" />
     <orderEntry type="library" name="Maven: org.drools:drools-decisiontables:7.0.0.Beta1" level="project" />
     <orderEntry type="library" name="Maven: org.drools:drools-templates:7.0.0.Beta1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml:3.13" level="project" />
@@ -33,11 +33,10 @@
     <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
-    <orderEntry type="library" name="Maven: nl.rws.re:re-facts:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="re-facts" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.6" level="project" />
-    <orderEntry type="module" module-name="re-facts" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-library:1.3" level="project" />
   </component>
 </module>

@@ -2,14 +2,14 @@ package nl.rws.re.frontend;
 
 import com.google.gson.Gson;
 import nl.rws.re.backend.*;
-import nl.rws.re.backend.Grondslag;
-import nl.rws.re.backend.Vraag;
-import nl.rws.re.facts.dakkapelx.*;
-import nl.rws.re.facts.dakkapelx.RuleResultaat;
 import nl.rws.re.facts.dakkapelx.Error;
+import nl.rws.re.facts.dakkapelx.VraagBuilder;
 import org.apache.log4j.Logger;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,27 +22,14 @@ public class DefinitieRESTService {
 
     private static Logger LOGGER = Logger.getLogger(DefinitieRESTService.class);
 
-    private Vraag vraag1;
-    private Vraag vraag2;
-
-    private Grondslag grondslag1;
-    private Grondslag grondslag2;
-
     @POST
     @Path("grondslagsVragen")
     @Produces("application/json")
-    @Consumes("application/json")
-    public String getGrondslagsVragen(List<nl.rws.re.facts.dakkapelx.Grondslag> grondslags) {
+    public String getGrondslagsVragen() {
 
         ObjectFactory objectFactory = new ObjectFactory();
 
         DefinitieRuleRequest definitieRuleRequest = objectFactory.createDefinitieRuleRequest();
-
-        for (nl.rws.re.facts.dakkapelx.Grondslag grondslag : grondslags) {
-            Grondslag tempGrondslag = objectFactory.createGrondslag();
-            tempGrondslag.setGrondslagBeschrijving(objectFactory.createGrondslagGrondslagBeschrijving(grondslag.getGrondslagBeschrijving()));
-            definitieRuleRequest.getGrondslag().add(tempGrondslag);
-        }
 
         DefinitieService definitieService = new DefinitieService();
         DefinitieRuleResponse definitieRuleResponse = definitieService.getDefinitieServiceHttpSoap11Endpoint().definitieRuleService(definitieRuleRequest);
@@ -60,17 +47,17 @@ public class DefinitieRESTService {
     @Path("resultaat")
     @Consumes("application/json")
     @Produces("application/json")
-    public String getResultaat(List<nl.rws.re.facts.dakkapelx.Vraag> vragen) {
+    public String getResultaat(List<nl.rws.re.facts.dakkapelx.Node> nodes) {
 
         ObjectFactory objectFactory = new ObjectFactory();
 
         DefinitieRuleRequest definitieRuleRequest = objectFactory.createDefinitieRuleRequest();
 
-        for (nl.rws.re.facts.dakkapelx.Vraag vraag : vragen) {
-            Vraag tempVraag = objectFactory.createVraag();
-            tempVraag.setVraagId(objectFactory.createVraagVraagId(vraag.getVraagId()));
-            tempVraag.setAntwoord(objectFactory.createVraagAntwoord(vraag.getAntwoord()));
-            definitieRuleRequest.getVraag().add(tempVraag);
+        for (nl.rws.re.facts.dakkapelx.Node node : nodes) {
+            Node tempNode = objectFactory.createNode();
+            tempNode.setId(node.getId());
+            tempNode.setAntwoord(objectFactory.createVraagAntwoord(node.getAntwoord()));
+            definitieRuleRequest.getNode().add(tempNode);
         }
 
         DefinitieService definitieService = new DefinitieService();
@@ -80,17 +67,17 @@ public class DefinitieRESTService {
 
         Gson gson = new Gson();
 
-        if (definitieRuleResponse.getRuleResultaat().size() > 0) {
-            List<RuleResultaat> results = new ArrayList<>();
-            for (nl.rws.re.backend.RuleResultaat result : definitieRuleResponse.getRuleResultaat()) {
-                results.add(new RuleResultaat(result.getResultaatVoor().getValue(),result.getResultaat().getValue()));
+        if (definitieRuleResponse.getNode().size() > 0) {
+            List<nl.rws.re.facts.dakkapelx.Node> results = new ArrayList<>();
+            for (Node result : definitieRuleResponse.getNode()) {
+                results.add(new nl.rws.re.facts.dakkapelx.Node(result.getId(), result.getAntwoord().getValue()));
             }
             jsonOutput = gson.toJson(results);
         } else {
             jsonOutput = gson.toJson(new Error("Wrong Output"));
         }
 
-//        return gson.toJson(vragen);
+
         return jsonOutput;
     }
 }
