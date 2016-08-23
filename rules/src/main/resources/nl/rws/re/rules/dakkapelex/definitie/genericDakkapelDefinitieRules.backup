@@ -25,22 +25,22 @@ end
 
 rule "Node 1 antwoord JA"
     when
-        Node(id == 2,antwoord==Antwoord.JA.name())
-        Node(id == 3,antwoord==Antwoord.JA.name())
+        Node(id == 2,antwoord==Antwoord.JA.getValue())
+        Node(id == 3,antwoord==Antwoord.JA.getValue())
     then
-        insert(new Node(1,Antwoord.JA.name()));
+        insert(new Node(1,Antwoord.JA.getValue()));
 end
 
 rule "Node 1 antwoord NEE voor node 2"
     when
-        Node(id == 2,antwoord==Antwoord.NEE.name())
+        Node(id == 2,antwoord==Antwoord.NEE.getValue())
     then
-        insert(new Node(1,Antwoord.NEE.name()));
+        insert(new Node(1,Antwoord.NEE.getValue()));
 end
 
 rule "Node 1 antwoord NEE voor node 3"
     when
-        Node(id == 3,antwoord==Antwoord.NEE.name())
+        Node(id == 3,antwoord==Antwoord.NEE.getValue())
     then
-        insert(new Node(1,Antwoord.NEE.name()));
+        insert(new Node(1,Antwoord.NEE.getValue()));
 end

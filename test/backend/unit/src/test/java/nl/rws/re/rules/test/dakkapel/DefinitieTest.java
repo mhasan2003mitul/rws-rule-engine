@@ -47,8 +47,8 @@ public class DefinitieTest extends BaseTest {
 
         kieSession = getKieSession("dakkapelExDefinitieSession");
 
-        kieSession.insert(new Node(2,Antwoord.JA.name()));
-        kieSession.insert(new Node(3,Antwoord.JA.name()));
+        kieSession.insert(new Node(2,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(3,Antwoord.JA.getValue()));
 
         kieSession.fireAllRules();
 
@@ -66,7 +66,7 @@ public class DefinitieTest extends BaseTest {
         Assert.assertThat(1, Matchers.isIn(new Integer[]{nodes.get(0).getId(), nodes.get(1).getId(),nodes.get(2).getId()}));
         for(Node n: nodes){
             if(n.getId() == 1){
-                Assert.assertThat("JA", Matchers.equalTo(n.getAntwoord()));
+                Assert.assertThat(Antwoord.JA.getValue(), Matchers.equalTo(n.getAntwoord()));
             }
         }
     }
@@ -76,8 +76,8 @@ public class DefinitieTest extends BaseTest {
 
         kieSession = getKieSession("dakkapelExDefinitieSession");
 
-        kieSession.insert(new Node(2,Antwoord.NEE.name()));
-        kieSession.insert(new Node(3,Antwoord.JA.name()));
+        kieSession.insert(new Node(2,Antwoord.NEE.getValue()));
+        kieSession.insert(new Node(3,Antwoord.JA.getValue()));
 
         kieSession.fireAllRules();
 
@@ -95,7 +95,7 @@ public class DefinitieTest extends BaseTest {
         Assert.assertThat(1, Matchers.isIn(new Integer[]{nodes.get(0).getId(), nodes.get(1).getId(),nodes.get(2).getId()}));
         for(Node n: nodes){
             if(n.getId() == 1){
-                Assert.assertThat("NEE", Matchers.equalTo(n.getAntwoord()));
+                Assert.assertThat(Antwoord.NEE.getValue(), Matchers.equalTo(n.getAntwoord()));
             }
         }
     }

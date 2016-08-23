@@ -29,16 +29,26 @@ public class VergunningvrijTest extends BaseTest{
 
         printAllObjects(kieSession.getObjects());
 
-        List<Vraag> vragen = new ArrayList<>();
+        List<String> vragen = new ArrayList<>();
 
         for(Object obj: kieSession.getObjects()){
             if(obj instanceof Vraag){
-                vragen.add((Vraag) obj);
+                vragen.add(((Vraag) obj).getVraagId());
             }
         }
-        Assert.assertThat(3,Matchers.equalTo(vragen.size()));
-        Assert.assertThat("3", Matchers.isIn(new String[]{vragen.get(0).getVraagId(),vragen.get(1).getVraagId(),vragen.get(2).getVraagId()}));
-        Assert.assertThat("4", Matchers.isIn(new String[]{vragen.get(0).getVraagId(),vragen.get(1).getVraagId(),vragen.get(2).getVraagId()}));
+        Assert.assertThat(25,Matchers.equalTo(vragen.size()));
+        Assert.assertThat("3", Matchers.isIn(vragen.toArray()));
+        Assert.assertThat("4", Matchers.isIn(vragen.toArray()));
+        Assert.assertThat("5", Matchers.isIn(vragen.toArray()));
+        Assert.assertThat("6", Matchers.isIn(vragen.toArray()));
+        Assert.assertThat("7", Matchers.isIn(vragen.toArray()));
+        Assert.assertThat("8", Matchers.isIn(vragen.toArray()));
+        Assert.assertThat("9", Matchers.isIn(vragen.toArray()));
+        Assert.assertThat("10", Matchers.isIn(vragen.toArray()));
+        Assert.assertThat("11", Matchers.isIn(vragen.toArray()));
+        Assert.assertThat("12", Matchers.isIn(vragen.toArray()));
+        Assert.assertThat("13", Matchers.isIn(vragen.toArray()));
+        Assert.assertThat("14", Matchers.isIn(vragen.toArray()));
     }
 
 
@@ -47,9 +57,30 @@ public class VergunningvrijTest extends BaseTest{
 
         kieSession = getKieSession("dakkapelExVergunningvrijSession");
 
-        kieSession.insert(new Node(5,Antwoord.JA.name()));
-        kieSession.insert(new Node(7,Antwoord.JA.name()));
-        kieSession.insert(new Node(8,Antwoord.NEE.name()));
+        kieSession.insert(new Node(12,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(13,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(14,Antwoord.NEE.getValue()));
+        kieSession.insert(new Node(15,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(16,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(17,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(18,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(19,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(20,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(21,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(22,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(23,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(24,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(25,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(26,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(27,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(28,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(29,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(30,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(31,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(32,Antwoord.NEE.getValue()));
+        kieSession.insert(new Node(33,Antwoord.NEE.getValue()));
+        kieSession.insert(new Node(34,Antwoord.NEE.getValue()));
+        kieSession.insert(new Node(35,Antwoord.NEE.getValue()));
 
         kieSession.fireAllRules();
 
@@ -67,11 +98,11 @@ public class VergunningvrijTest extends BaseTest{
             }
         }
 
-        Assert.assertThat(8, Matchers.equalTo(nodes.size()));
+        Assert.assertThat(35, Matchers.equalTo(nodes.size()));
         Assert.assertThat(1, Matchers.isIn(ids));
         for(Node n: nodes){
             if(n.getId() == 1){
-                Assert.assertThat(Antwoord.JA.name(), Matchers.equalTo(n.getAntwoord()));
+                Assert.assertThat(Antwoord.JA.getValue(), Matchers.equalTo(n.getAntwoord()));
             }
         }
     }
@@ -81,9 +112,30 @@ public class VergunningvrijTest extends BaseTest{
 
         kieSession = getKieSession("dakkapelExVergunningvrijSession");
 
-        kieSession.insert(new Node(5,Antwoord.NEE.name()));
-        kieSession.insert(new Node(7,Antwoord.JA.name()));
-        kieSession.insert(new Node(8,Antwoord.JA.name()));
+        kieSession.insert(new Node(12,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(13,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(14,Antwoord.NEE.getValue()));
+        kieSession.insert(new Node(15,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(16,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(17,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(18,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(19,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(20,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(21,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(22,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(23,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(24,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(25,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(26,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(27,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(28,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(29,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(30,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(31,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(32,Antwoord.NEE.getValue()));
+        kieSession.insert(new Node(33,Antwoord.NEE.getValue()));
+        kieSession.insert(new Node(34,Antwoord.NEE.getValue()));
+        kieSession.insert(new Node(35,Antwoord.JA.getValue()));
 
         kieSession.fireAllRules();
 
@@ -101,11 +153,11 @@ public class VergunningvrijTest extends BaseTest{
             }
         }
 
-        Assert.assertThat(8, Matchers.equalTo(nodes.size()));
+        Assert.assertThat(35, Matchers.equalTo(nodes.size()));
         Assert.assertThat(1, Matchers.isIn(ids));
         for(Node n: nodes){
             if(n.getId() == 1){
-                Assert.assertThat(Antwoord.NEE.name(), Matchers.equalTo(n.getAntwoord()));
+                Assert.assertThat(Antwoord.NEE.getValue(), Matchers.equalTo(n.getAntwoord()));
             }
         }    }
 

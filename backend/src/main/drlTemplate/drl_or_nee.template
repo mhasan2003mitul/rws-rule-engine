@@ -1,0 +1,6 @@
+rule "Node %s antwoord NEE"
+    when
+        %s
+    then
+        insert(new Node(%s,Antwoord.NEE.getValue()));
+end

@@ -1,0 +1,7 @@
+rule "Node %s antwoord NEE voor node %s"
+    when
+        not(Node(id == %s))
+        Node(id == %s,antwoord==%s)
+    then
+        insert(new Node(%s,Antwoord.NEE.getValue()));
+end

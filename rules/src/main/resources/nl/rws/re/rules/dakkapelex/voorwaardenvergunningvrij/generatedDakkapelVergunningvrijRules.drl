@@ -1,0 +1,578 @@
+package nl.rws.re.rules.dakkapel;
+import nl.rws.re.facts.dakkapelx.Node;
+import nl.rws.re.facts.dakkapelx.Vraag;
+import nl.rws.re.facts.dakkapelx.Antwoord;
+
+dialect  "mvel"
+
+rule "Node 1 antwoord NEE voor node 2"
+    when
+        not(Node(id == 1))
+        Node(id == 2,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(1,Antwoord.NEE.getValue()));
+end
+rule "Node 1 antwoord NEE voor node 33"
+    when
+        not(Node(id == 1))
+        Node(id == 33,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(1,Antwoord.NEE.getValue()));
+end
+rule "Node 1 antwoord NEE voor node 34"
+    when
+        not(Node(id == 1))
+        Node(id == 34,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(1,Antwoord.NEE.getValue()));
+end
+rule "Node 1 antwoord NEE voor node 35"
+    when
+        not(Node(id == 1))
+        Node(id == 35,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(1,Antwoord.NEE.getValue()));
+end
+rule "Node 1 antwoord JA"
+    when
+        Node(id == 2,antwoord==Antwoord.JA.getValue())
+		Node(id == 33,antwoord==Antwoord.NEE.getValue())
+		Node(id == 34,antwoord==Antwoord.NEE.getValue())
+		Node(id == 35,antwoord==Antwoord.NEE.getValue())
+		
+    then
+        insert(new Node(1,Antwoord.JA.getValue()));
+end
+rule "Node 2 antwoord JA voor node 3"
+    when
+        not(Node(id == 2))
+        Node(id == 3,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(2,Antwoord.JA.getValue()));
+end
+rule "Node 2 antwoord JA voor node 4"
+    when
+        not(Node(id == 2))
+        Node(id == 4,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(2,Antwoord.JA.getValue()));
+end
+rule "Node 2 antwoord NEE"
+    when
+        Node(id == 3,antwoord==Antwoord.NEE.getValue())
+		Node(id == 4,antwoord==Antwoord.NEE.getValue())
+		
+    then
+        insert(new Node(2,Antwoord.NEE.getValue()));
+end
+rule "Node 3 antwoord NEE voor node 6"
+    when
+        not(Node(id == 3))
+        Node(id == 6,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(3,Antwoord.NEE.getValue()));
+end
+rule "Node 3 antwoord NEE voor node 15"
+    when
+        not(Node(id == 3))
+        Node(id == 15,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(3,Antwoord.NEE.getValue()));
+end
+rule "Node 3 antwoord NEE voor node 16"
+    when
+        not(Node(id == 3))
+        Node(id == 16,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(3,Antwoord.NEE.getValue()));
+end
+rule "Node 3 antwoord NEE voor node 17"
+    when
+        not(Node(id == 3))
+        Node(id == 17,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(3,Antwoord.NEE.getValue()));
+end
+rule "Node 3 antwoord NEE voor node 18"
+    when
+        not(Node(id == 3))
+        Node(id == 18,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(3,Antwoord.NEE.getValue()));
+end
+rule "Node 3 antwoord NEE voor node 19"
+    when
+        not(Node(id == 3))
+        Node(id == 19,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(3,Antwoord.NEE.getValue()));
+end
+rule "Node 3 antwoord NEE voor node 10"
+    when
+        not(Node(id == 3))
+        Node(id == 10,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(3,Antwoord.NEE.getValue()));
+end
+rule "Node 3 antwoord JA"
+    when
+        Node(id == 6,antwoord==Antwoord.JA.getValue())
+		Node(id == 15,antwoord==Antwoord.JA.getValue())
+		Node(id == 16,antwoord==Antwoord.JA.getValue())
+		Node(id == 17,antwoord==Antwoord.JA.getValue())
+		Node(id == 18,antwoord==Antwoord.JA.getValue())
+		Node(id == 19,antwoord==Antwoord.JA.getValue())
+		Node(id == 10,antwoord==Antwoord.NEE.getValue())
+		
+    then
+        insert(new Node(3,Antwoord.JA.getValue()));
+end
+rule "Node 4 antwoord NEE voor node 5"
+    when
+        not(Node(id == 4))
+        Node(id == 5,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(4,Antwoord.NEE.getValue()));
+end
+rule "Node 4 antwoord NEE voor node 27"
+    when
+        not(Node(id == 4))
+        Node(id == 27,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(4,Antwoord.NEE.getValue()));
+end
+rule "Node 4 antwoord NEE voor node 28"
+    when
+        not(Node(id == 4))
+        Node(id == 28,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(4,Antwoord.NEE.getValue()));
+end
+rule "Node 4 antwoord NEE voor node 29"
+    when
+        not(Node(id == 4))
+        Node(id == 29,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(4,Antwoord.NEE.getValue()));
+end
+rule "Node 4 antwoord NEE voor node 30"
+    when
+        not(Node(id == 4))
+        Node(id == 30,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(4,Antwoord.NEE.getValue()));
+end
+rule "Node 4 antwoord NEE voor node 31"
+    when
+        not(Node(id == 4))
+        Node(id == 31,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(4,Antwoord.NEE.getValue()));
+end
+rule "Node 4 antwoord NEE voor node 32"
+    when
+        not(Node(id == 4))
+        Node(id == 32,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(4,Antwoord.NEE.getValue()));
+end
+rule "Node 4 antwoord JA"
+    when
+        Node(id == 5,antwoord==Antwoord.JA.getValue())
+		Node(id == 27,antwoord==Antwoord.JA.getValue())
+		Node(id == 28,antwoord==Antwoord.JA.getValue())
+		Node(id == 29,antwoord==Antwoord.JA.getValue())
+		Node(id == 30,antwoord==Antwoord.JA.getValue())
+		Node(id == 31,antwoord==Antwoord.JA.getValue())
+		Node(id == 32,antwoord==Antwoord.NEE.getValue())
+		
+    then
+        insert(new Node(4,Antwoord.JA.getValue()));
+end
+rule "Node 5 antwoord JA voor node 7"
+    when
+        not(Node(id == 5))
+        Node(id == 7,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(5,Antwoord.JA.getValue()));
+end
+rule "Node 5 antwoord JA voor node 8"
+    when
+        not(Node(id == 5))
+        Node(id == 8,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(5,Antwoord.JA.getValue()));
+end
+rule "Node 5 antwoord NEE"
+    when
+        Node(id == 7,antwoord==Antwoord.NEE.getValue())
+		Node(id == 8,antwoord==Antwoord.NEE.getValue())
+		
+    then
+        insert(new Node(5,Antwoord.NEE.getValue()));
+end
+rule "Node 6 antwoord JA voor node 12"
+    when
+        not(Node(id == 6))
+        Node(id == 12,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(6,Antwoord.JA.getValue()));
+end
+rule "Node 6 antwoord JA voor node 9"
+    when
+        not(Node(id == 6))
+        Node(id == 9,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(6,Antwoord.JA.getValue()));
+end
+rule "Node 6 antwoord NEE"
+    when
+        Node(id == 12,antwoord==Antwoord.NEE.getValue())
+		Node(id == 9,antwoord==Antwoord.NEE.getValue())
+		
+    then
+        insert(new Node(6,Antwoord.NEE.getValue()));
+end
+rule "Node 7 antwoord NEE voor node 10"
+    when
+        not(Node(id == 7))
+        Node(id == 10,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(7,Antwoord.NEE.getValue()));
+end
+rule "Node 7 antwoord NEE voor node 23"
+    when
+        not(Node(id == 7))
+        Node(id == 23,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(7,Antwoord.NEE.getValue()));
+end
+rule "Node 7 antwoord JA"
+    when
+        Node(id == 10,antwoord==Antwoord.JA.getValue())
+		Node(id == 23,antwoord==Antwoord.JA.getValue())
+		
+    then
+        insert(new Node(7,Antwoord.JA.getValue()));
+end
+rule "Node 8 antwoord JA voor node 11"
+    when
+        not(Node(id == 8))
+        Node(id == 11,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(8,Antwoord.JA.getValue()));
+end
+rule "Node 8 antwoord JA voor node 26"
+    when
+        not(Node(id == 8))
+        Node(id == 26,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(8,Antwoord.JA.getValue()));
+end
+rule "Node 8 antwoord NEE"
+    when
+        Node(id == 11,antwoord==Antwoord.NEE.getValue())
+		Node(id == 26,antwoord==Antwoord.NEE.getValue())
+		
+    then
+        insert(new Node(8,Antwoord.NEE.getValue()));
+end
+rule "Node 9 antwoord NEE voor node 13"
+    when
+        not(Node(id == 9))
+        Node(id == 13,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(9,Antwoord.NEE.getValue()));
+end
+rule "Node 9 antwoord NEE voor node 14"
+    when
+        not(Node(id == 9))
+        Node(id == 14,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(9,Antwoord.NEE.getValue()));
+end
+rule "Node 9 antwoord JA"
+    when
+        Node(id == 13,antwoord==Antwoord.JA.getValue())
+		Node(id == 14,antwoord==Antwoord.NEE.getValue())
+		
+    then
+        insert(new Node(9,Antwoord.JA.getValue()));
+end
+rule "Node 10 antwoord JA voor node 20"
+    when
+        not(Node(id == 10))
+        Node(id == 20,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(10,Antwoord.JA.getValue()));
+end
+rule "Node 10 antwoord JA voor node 21"
+    when
+        not(Node(id == 10))
+        Node(id == 21,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(10,Antwoord.JA.getValue()));
+end
+rule "Node 10 antwoord JA voor node 22"
+    when
+        not(Node(id == 10))
+        Node(id == 22,antwoord==Antwoord.JA.getValue())
+    then
+        insert(new Node(10,Antwoord.JA.getValue()));
+end
+rule "Node 10 antwoord NEE"
+    when
+        Node(id == 20,antwoord==Antwoord.NEE.getValue())
+		Node(id == 21,antwoord==Antwoord.NEE.getValue())
+		Node(id == 22,antwoord==Antwoord.NEE.getValue())
+		
+    then
+        insert(new Node(10,Antwoord.NEE.getValue()));
+end
+rule "Node 11 antwoord NEE voor node 24"
+    when
+        not(Node(id == 11))
+        Node(id == 24,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(11,Antwoord.NEE.getValue()));
+end
+rule "Node 11 antwoord NEE voor node 25"
+    when
+        not(Node(id == 11))
+        Node(id == 25,antwoord==Antwoord.NEE.getValue())
+    then
+        insert(new Node(11,Antwoord.NEE.getValue()));
+end
+rule "Node 11 antwoord JA"
+    when
+        Node(id == 24,antwoord==Antwoord.JA.getValue())
+		Node(id == 25,antwoord==Antwoord.JA.getValue())
+		
+    then
+        insert(new Node(11,Antwoord.JA.getValue()));
+end
+rule "vraag(id=3) voor node 12"
+    when
+        not(Node(id == 12))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("3");
+        vraag.setConversionId("1");
+        insert(vraag);
+end
+rule "vraag(id=3) voor node 13"
+    when
+        not(Node(id == 13))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("3");
+        vraag.setConversionId("2");
+        insert(vraag);
+end
+rule "vraag(id=4) voor node 14"
+    when
+        not(Node(id == 14))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("4");
+        vraag.setConversionId(null);
+        insert(vraag);
+end
+rule "vraag(id=5) voor node 15"
+    when
+        not(Node(id == 15))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("5");
+        vraag.setConversionId(null);
+        insert(vraag);
+end
+rule "vraag(id=6) voor node 16"
+    when
+        not(Node(id == 16))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("6");
+        vraag.setConversionId(null);
+        insert(vraag);
+end
+rule "vraag(id=7) voor node 17"
+    when
+        not(Node(id == 17))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("7");
+        vraag.setConversionId("4");
+        insert(vraag);
+end
+rule "vraag(id=8) voor node 18"
+    when
+        not(Node(id == 18))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("8");
+        vraag.setConversionId(null);
+        insert(vraag);
+end
+rule "vraag(id=9) voor node 19"
+    when
+        not(Node(id == 19))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("9");
+        vraag.setConversionId(null);
+        insert(vraag);
+end
+rule "vraag(id=10) voor node 20"
+    when
+        not(Node(id == 20))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("10");
+        vraag.setConversionId("5");
+        insert(vraag);
+end
+rule "vraag(id=11) voor node 20"
+    when
+        not(Node(id == 20))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("11");
+        vraag.setConversionId(null);
+        insert(vraag);
+end
+rule "vraag(id=12) voor node 21"
+    when
+        not(Node(id == 21))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("12");
+        vraag.setConversionId(null);
+        insert(vraag);
+end
+rule "vraag(id=10) voor node 22"
+    when
+        not(Node(id == 22))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("10");
+        vraag.setConversionId(null);
+        insert(vraag);
+end
+rule "vraag(id=13) voor node 22"
+    when
+        not(Node(id == 22))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("13");
+        vraag.setConversionId(null);
+        insert(vraag);
+end
+rule "vraag(id=3) voor node 23"
+    when
+        not(Node(id == 23))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("3");
+        vraag.setConversionId("1");
+        insert(vraag);
+end
+rule "vraag(id=3) voor node 24"
+    when
+        not(Node(id == 24))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("3");
+        vraag.setConversionId("1");
+        insert(vraag);
+end
+rule "vraag(id=4) voor node 25"
+    when
+        not(Node(id == 25))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("4");
+        vraag.setConversionId(null);
+        insert(vraag);
+end
+rule "vraag(id=3) voor node 26"
+    when
+        not(Node(id == 26))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("3");
+        vraag.setConversionId("3");
+        insert(vraag);
+end
+rule "vraag(id=5) voor node 27"
+    when
+        not(Node(id == 27))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("5");
+        vraag.setConversionId(null);
+        insert(vraag);
+end
+rule "vraag(id=10) voor node 28"
+    when
+        not(Node(id == 28))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("10");
+        vraag.setConversionId("5");
+        insert(vraag);
+end
+rule "vraag(id=7) voor node 29"
+    when
+        not(Node(id == 29))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("7");
+        vraag.setConversionId("4");
+        insert(vraag);
+end
+rule "vraag(id=8) voor node 30"
+    when
+        not(Node(id == 30))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("8");
+        vraag.setConversionId(null);
+        insert(vraag);
+end
+rule "vraag(id=9) voor node 31"
+    when
+        not(Node(id == 31))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("9");
+        vraag.setConversionId(null);
+        insert(vraag);
+end
+rule "vraag(id=14) voor node 32"
+    when
+        not(Node(id == 32))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("14");
+        vraag.setConversionId(null);
+        insert(vraag);
+end
+rule "vraag(id=10) voor node 33"
+    when
+        not(Node(id == 33))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("10");
+        vraag.setConversionId(null);
+        insert(vraag);
+end
+rule "vraag(id=10) voor node 34"
+    when
+        not(Node(id == 34))
+    then
+        Vraag vraag = new Vraag();
+        vraag.setVraagId("10");
+        vraag.setConversionId(null);
+        insert(vraag);
+end

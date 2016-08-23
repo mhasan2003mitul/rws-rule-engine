@@ -12,12 +12,23 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 public class Vraag {
     private String vraagId;
     private String antwoord;
+    private String conversionId;
 
     public Vraag() {
+        this(null);
     }
 
-    public Vraag(String vraagId, String antwoord) {
+    public Vraag(String vraagId){
+        this(vraagId,null);
+    }
+
+    public Vraag(String vraagId, String conversionId) {
+        this(vraagId,conversionId,null);
+    }
+
+    public Vraag(String vraagId,String conversionId, String antwoord) {
         this.vraagId = vraagId;
+        this.conversionId = conversionId;
         this.antwoord = antwoord;
     }
 
@@ -37,6 +48,14 @@ public class Vraag {
         this.antwoord = antwoord;
     }
 
+    public String getConversionId() {
+        return conversionId;
+    }
+
+    public void setConversionId(String conversionId) {
+        this.conversionId = conversionId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,6 +67,7 @@ public class Vraag {
         return new EqualsBuilder()
                 .append(getVraagId(), vraag.getVraagId())
                 .append(getAntwoord(), vraag.getAntwoord())
+                .append(getConversionId(),vraag.getConversionId())
                 .isEquals();
     }
 
@@ -56,6 +76,7 @@ public class Vraag {
         return new HashCodeBuilder(17, 37)
                 .append(getVraagId())
                 .append(getAntwoord())
+                .append(getConversionId())
                 .toHashCode();
     }
 }
