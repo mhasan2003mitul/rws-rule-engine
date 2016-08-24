@@ -1,9 +1,0 @@
-rule "vraag(id=%s) voor node %s"
-    when
-        not(Node(id == %s))
-    then
-        Vraag vraag = new Vraag();
-        vraag.setVraagId("%s");
-        vraag.setConversionId(%s);
-        insert(vraag);
-end

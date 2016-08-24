@@ -1,6 +1,0 @@
-rule "Node %s antwoord JA"
-    when
-        %s
-    then
-        insert(new Node(%s,Antwoord.JA.getValue()));
-end
