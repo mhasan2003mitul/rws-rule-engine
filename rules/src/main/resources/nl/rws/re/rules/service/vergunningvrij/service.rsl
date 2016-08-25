@@ -1,17 +1,17 @@
 <ruleService
         name="VergunningvrijService"
         xmlns="http://wso2.org/carbon/rules"
-        targetNamespace="http://dakkapelx.facts.re.rws.nl">
+        targetNamespace="http://facts.re.rws.nl">
     <ruleSet>
         <rule resourceType="regular" sourceType="file">genericDakkapelVergunningvrijRules.drl</rule>
     </ruleSet>
     <operation name="vergunningvrijService">
-        <input wrapperElementName="vergunningvrijRequest" targetNamespace="http://dakkapelx.facts.re.rws.nl">
-            <fact type="nl.rws.re.facts.dakkapelx.Node" targetNamespace="http://dakkapelx.facts.re.rws.nl"></fact>
+        <input wrapperElementName="vergunningvrijRequest" targetNamespace="http://facts.re.rws.nl">
+            <fact type="nl.rws.re.facts.Node" targetNamespace="http://facts.re.rws.nl"></fact>
         </input>
-        <output wrapperElementName="vergunningvrijResponse" targetNamespace="http://dakkapelx.facts.re.rws.nl">
-            <fact type="nl.rws.re.facts.dakkapelx.Vraag" targetNamespace="http://dakkapelx.facts.re.rws.nl"></fact>
-            <fact type="nl.rws.re.facts.dakkapelx.Node" targetNamespace="http://dakkapelx.facts.re.rws.nl"></fact>
+        <output wrapperElementName="vergunningvrijResponse" targetNamespace="http://facts.re.rws.nl">
+            <fact type="nl.rws.re.facts.Vraag" targetNamespace="http://facts.re.rws.nl"></fact>
+            <fact type="nl.rws.re.facts.Node" targetNamespace="http://facts.re.rws.nl"></fact>
         </output>
     </operation>
 </ruleService>

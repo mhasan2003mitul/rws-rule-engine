@@ -1,4 +1,4 @@
-package nl.rws.re.facts.dakkapelx;
+package nl.rws.re.facts;
 
 import java.io.Serializable;
 

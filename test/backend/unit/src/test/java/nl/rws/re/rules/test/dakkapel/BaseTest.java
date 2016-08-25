@@ -1,8 +1,8 @@
 package nl.rws.re.rules.test.dakkapel;
 
-import nl.rws.re.facts.dakkapelx.*;
-import nl.rws.re.facts.dakkapelx.Error;
-import org.junit.After;
+import nl.rws.re.facts.Node;
+import nl.rws.re.facts.Vraag;
+import nl.rws.re.facts.Error;
 import org.kie.api.KieServices;
 import org.kie.api.event.rule.DebugAgendaEventListener;
 import org.kie.api.runtime.KieContainer;

@@ -3,7 +3,6 @@ package nl.rws.re.rules.test;
 import nl.rws.re.facts.order.OrderAccept;
 import nl.rws.re.facts.order.OrderReject;
 import nl.rws.re.facts.order.PlaceOrder;
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,12 +10,14 @@ import org.junit.Test;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by Administrator on 08-Jul-16.
  */
 public class PlaceOrderTest {
-    private static Logger LOGGER = Logger.getLogger(PlaceOrderTest.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(PlaceOrderTest.class);
 
     private KieSession kieSession;
 

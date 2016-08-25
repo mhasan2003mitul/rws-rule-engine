@@ -1,7 +1,7 @@
-package nl.rws.re.facts.dakkapelx;
+package nl.rws.re.facts;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Created by Md. Mainul Hasan Patwary on 17-Aug-16.
@@ -35,6 +35,7 @@ public class Node {
     public void setAntwoord(String antwoord) {
         this.antwoord = antwoord;
     }
+
 
     @Override
     public boolean equals(Object o) {

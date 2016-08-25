@@ -1,6 +1,8 @@
 package nl.rws.re.rules.test.dakkapel;
 
-import nl.rws.re.facts.dakkapelx.*;
+import nl.rws.re.facts.Antwoord;
+import nl.rws.re.facts.Node;
+import nl.rws.re.facts.Vraag;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Assert;

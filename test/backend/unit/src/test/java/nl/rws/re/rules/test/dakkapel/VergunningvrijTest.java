@@ -1,6 +1,8 @@
 package nl.rws.re.rules.test.dakkapel;
 
-import nl.rws.re.facts.dakkapelx.*;
+import nl.rws.re.facts.Antwoord;
+import nl.rws.re.facts.Node;
+import nl.rws.re.facts.Vraag;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Assert;
@@ -57,7 +59,7 @@ public class VergunningvrijTest extends BaseTest{
 
         kieSession = getKieSession("dakkapelExVergunningvrijSession");
 
-        kieSession.insert(new Node(12,Antwoord.JA.getValue()));
+        kieSession.insert(new Node(12, Antwoord.JA.getValue()));
         kieSession.insert(new Node(13,Antwoord.JA.getValue()));
         kieSession.insert(new Node(14,Antwoord.NEE.getValue()));
         kieSession.insert(new Node(15,Antwoord.JA.getValue()));

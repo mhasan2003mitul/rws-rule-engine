@@ -1,4 +1,4 @@
-package nl.rws.re.facts.dakkapelx;
+package nl.rws.re.facts;
 
 /**
  * Created by Md. Mainul Hasan Patwary on 01-Aug-16.

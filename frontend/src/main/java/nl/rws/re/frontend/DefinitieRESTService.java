@@ -2,9 +2,12 @@ package nl.rws.re.frontend;
 
 import com.google.gson.Gson;
 import nl.rws.re.backend.*;
-import nl.rws.re.facts.dakkapelx.Error;
-import nl.rws.re.facts.dakkapelx.VraagBuilder;
-import org.apache.log4j.Logger;
+import nl.rws.re.backend.Node;
+import nl.rws.re.backend.Vraag;
+import nl.rws.re.facts.Error;
+import nl.rws.re.facts.VraagBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -20,7 +23,7 @@ import java.util.List;
 @Path("definitieRule")
 public class DefinitieRESTService {
 
-    private static Logger LOGGER = Logger.getLogger(DefinitieRESTService.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(DefinitieRESTService.class);
 
     @POST
     @Path("grondslagsVragen")
@@ -34,7 +37,7 @@ public class DefinitieRESTService {
         DefinitieService definitieService = new DefinitieService();
         DefinitieRuleResponse definitieRuleResponse = definitieService.getDefinitieServiceHttpSoap11Endpoint().definitieRuleService(definitieRuleRequest);
 
-        List<nl.rws.re.facts.dakkapelx.Vraag> vraags = new ArrayList<>();
+        List<nl.rws.re.facts.Vraag> vraags = new ArrayList<>();
         for (Vraag vraag : definitieRuleResponse.getVraag()) {
             vraags.add(new VraagBuilder().metVraagId(vraag.getVraagId().getValue().toString()).build());
         }
@@ -47,13 +50,13 @@ public class DefinitieRESTService {
     @Path("resultaat")
     @Consumes("application/json")
     @Produces("application/json")
-    public String getResultaat(List<nl.rws.re.facts.dakkapelx.Node> nodes) {
+    public String getResultaat(List<nl.rws.re.facts.Node> nodes) {
 
         ObjectFactory objectFactory = new ObjectFactory();
 
         DefinitieRuleRequest definitieRuleRequest = objectFactory.createDefinitieRuleRequest();
 
-        for (nl.rws.re.facts.dakkapelx.Node node : nodes) {
+        for (nl.rws.re.facts.Node node : nodes) {
             Node tempNode = objectFactory.createNode();
             tempNode.setId(node.getId());
             tempNode.setAntwoord(objectFactory.createVraagAntwoord(node.getAntwoord()));
@@ -68,9 +71,9 @@ public class DefinitieRESTService {
         Gson gson = new Gson();
 
         if (definitieRuleResponse.getNode().size() > 0) {
-            List<nl.rws.re.facts.dakkapelx.Node> results = new ArrayList<>();
+            List<nl.rws.re.facts.Node> results = new ArrayList<>();
             for (Node result : definitieRuleResponse.getNode()) {
-                results.add(new nl.rws.re.facts.dakkapelx.Node(result.getId(), result.getAntwoord().getValue()));
+                results.add(new nl.rws.re.facts.Node(result.getId(), result.getAntwoord().getValue()));
             }
             jsonOutput = gson.toJson(results);
         } else {
