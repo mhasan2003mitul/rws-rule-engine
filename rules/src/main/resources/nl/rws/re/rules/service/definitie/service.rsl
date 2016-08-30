@@ -3,13 +3,13 @@
         xmlns="http://wso2.org/carbon/rules"
         targetNamespace="http://facts.re.rws.nl">
     <ruleSet>
-        <rule resourceType="regular" sourceType="file">genericDakkapelDefinitieRules.drl</rule>
+        <rule resourceType="regular" sourceType="file">generatedDakkapelDefinitieRules.drl</rule>
     </ruleSet>
     <operation name="definitieRuleService">
         <input wrapperElementName="definitieRuleRequest" targetNamespace="http://facts.re.rws.nl">
             <fact type="nl.rws.re.facts.Node" targetNamespace="http://facts.re.rws.nl"></fact>
         </input>
-        <output wrapperElementName="definitieRuleResponse" targetNamespace="http://dakkapelx.facts.re.rws.nl">
+        <output wrapperElementName="definitieRuleResponse" targetNamespace="http://facts.re.rws.nl">
             <fact type="nl.rws.re.facts.Vraag" targetNamespace="http://facts.re.rws.nl"></fact>
             <fact type="nl.rws.re.facts.Node" targetNamespace="http://facts.re.rws.nl"></fact>
         </output>

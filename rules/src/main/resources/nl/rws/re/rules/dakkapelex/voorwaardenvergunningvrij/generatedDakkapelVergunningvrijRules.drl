@@ -1,8 +1,7 @@
-package nl.rws.re.rules.dakkapel;
+package nl.rws.re.rules;
 import nl.rws.re.facts.Node;
-import nl.rws.re.facts.Vraag;
 import nl.rws.re.facts.Antwoord
-import nl.rws.re.facts.Vraag;
+import nl.rws.re.facts.Vraag
 
 dialect  "mvel"
 
