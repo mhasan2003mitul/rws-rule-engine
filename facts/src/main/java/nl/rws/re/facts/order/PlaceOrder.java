@@ -5,8 +5,8 @@
  */
 package nl.rws.re.facts.order;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * @author Mainul
@@ -57,12 +57,26 @@ public class PlaceOrder {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return new EqualsBuilder().append(this,obj).isEquals();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof PlaceOrder)) return false;
+
+        PlaceOrder that = (PlaceOrder) o;
+
+        return new EqualsBuilder()
+                .append(getQuantity(), that.getQuantity())
+                .append(getPrice(), that.getPrice())
+                .append(getSymbol(), that.getSymbol())
+                .isEquals();
     }
 
     @Override
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return new HashCodeBuilder(17, 37)
+                .append(getSymbol())
+                .append(getQuantity())
+                .append(getPrice())
+                .toHashCode();
     }
 }

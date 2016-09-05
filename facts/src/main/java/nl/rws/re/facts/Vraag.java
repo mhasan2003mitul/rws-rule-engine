@@ -1,7 +1,7 @@
 package nl.rws.re.facts;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * Created by Md. Mainul Hasan Patwary on 01-Aug-16.
@@ -67,7 +67,7 @@ public class Vraag {
         return new EqualsBuilder()
                 .append(getVraagId(), vraag.getVraagId())
                 .append(getAntwoord(), vraag.getAntwoord())
-                .append(getConversionId(),vraag.getConversionId())
+                .append(getConversionId(), vraag.getConversionId())
                 .isEquals();
     }
 
